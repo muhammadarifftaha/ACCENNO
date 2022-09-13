@@ -12,11 +12,8 @@
     <!-- Title -->
     <title>ACCENNO</title>
     <!-- CSS -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
-    <link rel="stylesheet" href="style.css" />
+    
+    <link rel="stylesheet" href="assets/style.css" />
 
     <!-- JavaScript & JQuery -->
     <script
@@ -30,7 +27,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <script src="app.js" defer></script>
+    <script src="assets/app.js" defer></script>
   </head>
   <body>
     <section id="landing-section">
@@ -123,17 +120,18 @@
               </table>
             </div>
           </div>
-          <button class="back-btn">Back</button>
+          <button class="back-btn quit-btn">Back</button>
         </div>
       </div>
     </section>
-
     <section id="gameboard">
       <div class="container full-page">
         <div class="container x-align game-area card">
           <div class="container y-align status sidebar justify-around">
             <div class="container x-align turn-status">
-              <div class="container" id="circle"></div>
+              <div class="container" id="circle" data-value="0">
+                <p id="timer-text">30</p>
+              </div>
               <h4 class="player-turn">Your Turn</h4>
             </div>
             <hr class="horizontal-line" />
@@ -171,29 +169,34 @@
               </div>
             </div>
             <div class="container x-align">
-              <button>Start Game</button>
+              <button class="start-game">Start Game</button>
               <button>Restart</button>
-              <button>Quit</button>
+              <button class="quit-btn">Quit</button>
             </div>
           </div>
-          <div class="container card h80">
+          <div class="container card h80 board">
             <table class="xo-board">
               <tr>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
+                <td class="xo-cell empty" data-row="r1" data-col="c1"></td>
+                <td class="xo-cell empty" data-row="r1" data-col="c2"></td>
+                <td class="xo-cell empty" data-row="r1" data-col="c3"></td>
               </tr>
               <tr>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
+                <td class="xo-cell empty" data-row="r2" data-col="c1"></td>
+                <td class="xo-cell empty" data-row="r2" data-col="c2"></td>
+                <td class="xo-cell empty" data-row="r2" data-col="c3"></td>
               </tr>
               <tr>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
-                <td class="xo-cell"></td>
+                <td class="xo-cell empty" data-row="r3" data-col="c1"></td>
+                <td class="xo-cell empty" data-row="r3" data-col="c2"></td>
+                <td class="xo-cell empty" data-row="r3" data-col="c3"></td>
               </tr>
             </table>
+            <div class="container accenno-cover">
+                <div class="container card cover-baby">
+                <h2>Click Start Game to Play</h2>
+                </div>
+            </div>
           </div>
           </div>
         </div>

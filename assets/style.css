@@ -14,7 +14,7 @@ font-family: 'ZCOOL QingKe HuangYou', cursive;
 html {
   background-color: #fdeedc;
   font-size: 1vh;
-  /* overflow-x: hidden; */
+  /* overflow: hidden; */
 }
 
 section {
@@ -31,7 +31,7 @@ header {
   height: 10vh;
   padding: 1rem 2rem;
   display: flex;
-  align-itrems: center;
+  align-items: center;
 }
 
 #link-heading {
@@ -123,6 +123,7 @@ button:active {
 
 .xo-board,
 .xo-board-ex {
+  display: table;
   height: 50vh;
   width: 50vh;
   border-collapse: collapse;
@@ -130,17 +131,19 @@ button:active {
 
 .xo-cell,
 .xo-cell-ex {
+  display: table-cell;
+  text-align: center;
   width: 30%;
   height: 30%;
   border: 2px solid black;
   background-color: white;
 }
 
-.xo-cell:hover {
+.xo-cell.empty:hover {
   background-color: #fdeedc;
 }
 
-.xo-cell.active {
+.xo-cell.empty.active {
   background-color: #ffd8a9;
 }
 
@@ -172,13 +175,13 @@ button:active {
 }
 .sidebar {
   width: 30%;
-  height: 50%;
+  height: 70%;
   font-size: 3em;
   padding: 1em;
 }
 .turn-status {
   gap: 1em;
-  height: 10%;
+  height: 100%;
 }
 .status.sidebar {
   gap: 1em;
@@ -199,12 +202,11 @@ button:active {
   border-radius: 0 0 1rem 1rem;
   border-top: 0;
 }
-.history {
-  overflow-y: auto;
-  overflow-x: auto;
-}
 .player-turn {
   font-size: 100%;
+}
+.marker {
+  width: 80%;
 }
 
 /* #region scorekeeper */
@@ -231,7 +233,31 @@ button:active {
 }
 /* #endregion */
 /* #endregion */
-/*#region reusable class configurations */
+/* #region Other Game CSS */
+#circle {
+  position: relative;
+}
+#timer-text {
+  text-align: center;
+  position: absolute;
+  font-size: 2em;
+}
+.board {
+  position: relative;
+}
+.accenno-cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(29, 29, 29, 0.5);
+  border-radius: 2rem;
+}
+.cover-baby {
+  width: 40%;
+  height: 30%;
+}
+/* #endregion */
+/* #region reusable class configurations */
 .container {
   display: flex;
   align-items: center;
