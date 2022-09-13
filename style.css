@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=ZCOOL+QingKe+HuangYou&display=swap");
+/* 
+font-family: 'Quicksand', sans-serif;
+font-family: 'ZCOOL QingKe HuangYou', cursive;
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+}
+
+html {
+  background-color: #fdeedc;
+  font-size: 1vh;
+  /* overflow-x: hidden; */
+}
+
+section {
+  max-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/*#region Header */
+header {
+  background-color: #e38b29;
+  min-height: 10vh;
+  height: 10vh;
+  padding: 1rem 2rem;
+  display: flex;
+  align-itrems: center;
+}
+
+#link-heading {
+  color: black;
+  text-decoration: none;
+}
+#link-logo {
+  display: inline-flex;
+}
+#heading {
+  font-family: "ZCOOL QingKe HuangYou", cursive;
+  font-size: 8rem;
+}
+#logo-img {
+  height: 8rem;
+}
+#blinking-header {
+  height: 8rem;
+  margin: 0 1rem;
+}
+
+/* #endregion */
+/* #region Main Menu */
+.landing-page {
+  height: 90vh;
+}
+
+.main-menu {
+  width: 50vw;
+  height: 63vh;
+  text-align: center;
+  border: 1px solid rgb(70, 70, 70);
+  border-radius: 3rem;
+  box-shadow: 5px 5px 5px 1px rgba(53, 53, 53, 0.644);
+  background-color: white;
+  align-self: center;
+  font-size: 3rem;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1em;
+}
+
+#titlecard {
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 0;
+}
+
+#titlecard-logo {
+  align-self: center;
+  height: 60%;
+  margin-bottom: 1.5em;
+}
+
+.mainmenu-buttons {
+  height: 25%;
+}
+
+button {
+  font-family: "ZCOOL QingKe HuangYou", cursive;
+  font-size: 1.5vw;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 2.5px 2.5px 5px 1px rgba(71, 71, 71, 0.644);
+}
+
+button:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transform: translateY(0.1em);
+}
+.mainmenu-buttons button {
+  background-image: linear-gradient(#f1a661, #ffd8a9);
+}
+.mainmenu-buttons button:hover {
+  background-image: linear-gradient(#fdeedc, #ffd8a9);
+}
+/* #endregion */
+/* #region How To Play Page */
+#instructions {
+  background-color: #e38b29;
+}
+
+.xo-board,
+.xo-board-ex {
+  height: 50vh;
+  width: 50vh;
+  border-collapse: collapse;
+}
+
+.xo-cell,
+.xo-cell-ex {
+  width: 30%;
+  height: 30%;
+  border: 2px solid black;
+  background-color: white;
+}
+
+.xo-cell:hover {
+  background-color: #fdeedc;
+}
+
+.xo-cell.active {
+  background-color: #ffd8a9;
+}
+
+.instructions-anim {
+  gap: 5em;
+}
+.instruction-text td {
+  padding: 0.5vh 1vw;
+  border-radius: 0.25em;
+  font-size: 3em;
+}
+.instruction-text td.active {
+  background-color: #f1a661;
+}
+
+#anim-cursor {
+  position: absolute;
+  height: 7vh;
+}
+/* #endregion */
+/* #region Game Area */
+.game-area {
+  width: 95%;
+  height: 95%;
+}
+.game-area > div {
+  flex: 1 1 0;
+  margin: 3rem;
+}
+.sidebar {
+  width: 30%;
+  height: 50%;
+  font-size: 3em;
+  padding: 1em;
+}
+.turn-status {
+  gap: 1em;
+  height: 10%;
+}
+.status.sidebar {
+  gap: 1em;
+  border-right: 1px solid rgba(53, 53, 53, 0.644);
+  margin-right: 0;
+}
+.score-section {
+  width: 100%;
+  height: 3em;
+  border: 1px solid rgba(29, 29, 29, 0.5);
+}
+
+#status-title {
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 0;
+}
+#status-p2 {
+  border-radius: 0 0 1rem 1rem;
+  border-top: 0;
+}
+.history {
+  overflow-y: auto;
+  overflow-x: auto;
+}
+.player-turn {
+  font-size: 100%;
+}
+
+/* #region scorekeeper */
+.tally {
+  width: 50%;
+}
+.tally-box {
+  width: 20%;
+  padding-top: 20%;
+  border: 1px solid rgba(53, 53, 53, 0.644);
+}
+
+.tally-box.bl-0 {
+  border-left: 0;
+}
+
+.tally-box.inbox {
+  border-radius: 0.25em 0 0 0.25em;
+}
+
+.tally-box.outbox {
+  border-radius: 0 0.25em 0.25em 0;
+  border-left: 0;
+}
+/* #endregion */
+/* #endregion */
+/*#region reusable class configurations */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.container.justify-start {
+  justify-content: flex-start;
+}
+
+.container.justify-around {
+  justify-content: space-around;
+}
+.container.justify-between {
+  justify-content: space-between;
+}
+
+.container.align-start {
+  align-items: flex-start;
+}
+.container.y-align {
+  flex-direction: column;
+}
+.container.x-align {
+  flex-direction: row;
+}
+
+.full-page {
+  height: 100vh;
+  width: 100%;
+}
+.w80 {
+  width: 80%;
+}
+.h80 {
+  height: 80%;
+}
+.w90 {
+  width: 90%;
+}
+.w100 {
+  width: 100%;
+}
+.card {
+  border: 1px solid gray;
+  border-radius: 2rem;
+  box-shadow: 5px 5px 4px 4px rgba(71, 71, 71, 0.644);
+  background-color: white;
+}
+.page-title {
+  font-size: 5vh;
+  font-weight: 600;
+  margin-bottom: 3vh;
+}
+.list-num {
+  font-weight: 600;
+}
+
+.back-btn {
+  align-self: end;
+  justify-self: end;
+  margin: 0 2em;
+}
+.horizontal-line {
+  width: 80%;
+  border: 1px solid grey;
+}
+
+ul,
+li {
+  list-style-type: circle;
+  padding: initial;
+  margin: initial;
+}
+
+/* #endregion */

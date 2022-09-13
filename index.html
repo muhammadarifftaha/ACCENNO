@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <!-- Title -->
+    <title>ACCENNO</title>
+    <!-- CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- JavaScript & JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.2/circle-progress.min.js"
+      integrity="sha512-6kvhZ/39gRVLmoM/6JxbbJVTYzL/gnbDVsHACLx/31IREU4l3sI7yeO0d4gw8xU5Mpmm/17LMaDHOCf+TvuC2Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <section id="landing-section">
+      <header class="brand-top">
+        <a href="/" class="" id="link-logo">
+          <img id="logo-img" src="images/logo.png" alt="" />
+        </a>
+        <a href="/" class="brand-top" id="link-heading">
+          <h1 id="heading"></h1>
+        </a>
+        <img id="blinking-header" src="images/line.png" alt="" />
+      </header>
+      <div class="landing-page container">
+        <div class="container main-menu">
+          <div id="titlecard">
+            <img
+              src="images/full-logo-trimmed.png"
+              id="titlecard-logo"
+              alt=""
+            />
+            <h3>A Tic-Tac-Toe Game</h3>
+            <h6>by TAHA</h6>
+          </div>
+          <div class="container mainmenu-buttons y-align">
+            <div class="container">
+              <button class="mainmenu-btn" data-target="how">
+                HOW TO PLAY
+              </button>
+            </div>
+            <div class="container">
+              <button class="mainmenu-btn" data-target="AI">VS AI</button>
+              <button class="mainmenu-btn" data-target="2P" disabled>
+                VS 2P
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="instructions">
+      <div class="container y-align full-page">
+        <div class="container y-align card w80 h80">
+          <h2 class="page-title">How to play</h2>
+          <div class="container x-align instructions-anim">
+            <table class="xo-board-ex">
+              <tr>
+                <td class="xo-cell-ex"></td>
+                <td class="xo-cell-ex"></td>
+                <td class="xo-cell-ex"></td>
+              </tr>
+              <tr>
+                <td class="xo-cell-ex"></td>
+                <td class="xo-cell-ex">
+                  <img id="anim-cursor" src="images/cursor.png" alt="" />
+                </td>
+                <td class="xo-cell-ex"></td>
+              </tr>
+              <tr>
+                <td class="xo-cell-ex"></td>
+                <td class="xo-cell-ex"></td>
+                <td class="xo-cell-ex"></td>
+              </tr>
+            </table>
+            <div class="container y-align">
+              <table class="instruction-text">
+                <tr>
+                  <td class="active">
+                    <p>
+                      <span class="list-num">1.</span> Select any available
+                      space to place your marker
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>
+                      <span class="list-num">2.</span> Click once to highlight
+                      the space.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>
+                      <span class="list-num">3.</span> Double-click to confirm
+                      your selection.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <button class="back-btn">Back</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="gameboard">
+      <div class="container full-page">
+        <div class="container x-align game-area card">
+          <div class="container y-align status sidebar justify-around">
+            <div class="container x-align turn-status">
+              <div class="container" id="circle"></div>
+              <h4 class="player-turn">Your Turn</h4>
+            </div>
+            <hr class="horizontal-line" />
+            <div class="container y-align w90">
+              <div class="container y-align score-section" id="status-title">
+                <h4 class="">Scoreboard</h4>
+                <h5>ROUND : <span id="round-num">1</span></h5>
+              </div>
+              <div
+                class="container x-align score-section justify-evenly"
+                id="status-p1"
+              >
+                <h5 class="">Player 1</h5>
+
+                <div class="container x-align tally">
+                  <div class="tally-box inbox"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box outbox"></div>
+                </div>
+              </div>
+              <div
+                class="container x-align score-section justify-evenly"
+                id="status-p2"
+              >
+                <h5 class="opponent-name">Player 2</h5>
+                <div class="container x-align tally">
+                  <div class="tally-box inbox"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box bl-0"></div>
+                  <div class="tally-box outbox"></div>
+                </div>
+              </div>
+            </div>
+            <div class="container x-align">
+              <button>Start Game</button>
+              <button>Restart</button>
+              <button>Quit</button>
+            </div>
+          </div>
+          <div class="container card h80">
+            <table class="xo-board">
+              <tr>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+              </tr>
+              <tr>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+              </tr>
+              <tr>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+                <td class="xo-cell"></td>
+              </tr>
+            </table>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
