@@ -14,7 +14,7 @@ font-family: 'ZCOOL QingKe HuangYou', cursive;
 html {
   background-color: #fdeedc;
   font-size: 1vh;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 section {

@@ -1,7 +1,8 @@
 //#region Global Variables
 const intervalID = { timer: 0, wait: 0, blink: 0 };
-const playerInfo = { marker: "", turn: 0 };
-const AIinfo = { type: "AI", marker: "", turn: 0 };
+const timeoutID = { AI: 0, turnend: 0 };
+const playerInfo = { marker: "", turn: 0, wins: 0 };
+const AIinfo = { type: "AI", marker: "", turn: 0, wins: 0 };
 const markXO = {
   o: '<img src="images/noughts.png" alt="X-mark" />',
   x: '<img src="images/crosses.png" alt="O-mark" />',
@@ -32,7 +33,13 @@ const marker = $(".marker-buttons");
 const cover = $(".accenno-cover");
 const startMenu = $(".start-menu");
 const waiting = $(".waiting");
-const newRound = $("#new-round");
+const timeout = $("#timeout");
+const endingTurn = $(".ending-turn");
+
+const newRound = $(".new-round");
+const newRoundBtn = $("#new-round-btn");
+const nextRoundbtn = $("#next-round");
+
 const timerText = $("#timer-text");
 const popup = $(".popup");
 const turnText = $("#turn-text");
@@ -74,29 +81,17 @@ function headerAnimation() {
 }
 
 function initialise() {
+  resetGame();
   headerAnimation();
 
   intervalID.blink = setInterval(function () {
     $("#blinking-header").toggle();
   }, 500);
-  waiting.hide();
+  toggleCover("NG");
   popup.hide();
 }
 
 function returnToMenu() {
-  accenno.turnTracker = 1;
-  accenno.roundTracker = 1;
-  AIinfo.type = "";
-  playerInfo.marker = "";
-
-  for (const row in accenno.board) {
-    for (const col in accenno.board[row]) {
-      accenno.board[row][col] = 0;
-    }
-  }
-
-  gameCell.removeClass("active");
-  gameCell.html("");
   $("html, body").animate({ scrollTop: 0 }, 800);
   setTimeout(function () {
     initialise();
@@ -108,17 +103,11 @@ function returnToMenu() {
     if (this.hasClass("empty")) {
       gameCell.removeClass("active");
       this.removeClass("empty");
-      this.html(playerInfo.marker);
-      markBoard(this.data("pos"), playerInfo.turn);
-    }
-    return this;
-  };
-  $.fn.toggleSelected = function () {
-    if (this.hasClass("active")) {
-      this.removeClass("active");
-    } else {
-      gameCell.removeClass("active");
-      this.addClass("active");
+      if (playerInfo.turn === accenno.turnTracker) {
+        this.html(playerInfo.marker);
+      } else {
+        this.html(AIinfo.marker);
+      }
     }
     return this;
   };
@@ -127,7 +116,7 @@ function returnToMenu() {
 //#endregion
 
 //#region Main Menu
-mainMenuBtn.click(function () {
+function gotoTarget() {
   let playerType = $(this).data("target");
 
   if (playerType == "how") {
@@ -143,19 +132,26 @@ mainMenuBtn.click(function () {
     clearInterval(intervalID.blink);
     heading.text("");
   }, 500);
-});
+}
 //#endregion
 
 //#region Instructions animation
 //soon
 //#endregion
 
-//#region Back Buttons
-
+//#region Buttons
+mainMenuBtn.click(gotoTarget);
 quitBtns.click(returnToMenu);
+newRoundBtn.click(turns);
+nextRoundbtn.click(nextRound);
+gameCell.dblclick(confirmMark);
+marker.click(chooseMarker);
+gameCell.click(toggleSelected);
+
 //#endregion
 
-marker.click(function () {
+//#region Game Algorithm
+function chooseMarker() {
   playerInfo.marker = markXO[$(this).data("marker")];
   if (playerInfo.marker === markXO.o) {
     AIinfo.marker = markXO.x;
@@ -167,7 +163,7 @@ marker.click(function () {
     AIinfo.turn = 1;
   }
   turns();
-});
+}
 
 function turns() {
   if (playerInfo.turn === accenno.turnTracker) {
@@ -183,27 +179,36 @@ function turnPlayer() {
   toggleCover();
 }
 
-gameCell.click(function () {
-  $(this).toggleSelected();
-});
+function toggleSelected() {
+  if ($(this).hasClass("active")) {
+    $(this).removeClass("active");
+  } else {
+    gameCell.removeClass("active");
+    $(this).addClass("active");
+  }
+}
 
-gameCell.dblclick(function () {
+function confirmMark() {
   $(this).placeMarker();
+  markBoard($(this).data("pos"));
   endTurn();
-});
+}
 
 function endTurn() {
   turnTimeout();
-  if (accenno.turnTracker == 1) {
-    accenno.turnTracker++;
-  } else if (accenno.turnTracker == 2) {
-    accenno.turnTracker--;
-  }
-  if (endRound()) {
-    popup.show();
-  } else {
-    turns();
-  }
+  toggleCover("ET");
+  timeoutID.turnend = setTimeout(function () {
+    if (accenno.turnTracker == 1) {
+      accenno.turnTracker++;
+    } else if (accenno.turnTracker == 2) {
+      accenno.turnTracker--;
+    }
+    if (endRound()) {
+      popup.show();
+    } else {
+      turns();
+    }
+  }, 1250);
 }
 
 function turnAI() {
@@ -219,21 +224,24 @@ function turnAI() {
       return [rowAI, colAI];
     };
 
-    let randomTime = 1000 + Math.floor(Math.random() * 10) * 1000;
+    let randomTime = 1000 + Math.ceil(Math.random() * 9) * 1000;
 
     let occupied = true;
     let selectionAI = chooseAI();
 
     while (occupied === true) {
-      if (accenno[selectionAI[0]][selectionAI[1]] !== 0) {
+      if (accenno.board[selectionAI[0]][selectionAI[1]] !== 0) {
         selectionAI = chooseAI();
       } else {
         occupied = false;
       }
     }
-    setTimeout(function () {
-      const placeAI = $(".xo-board tr").find(`[data-pos="${selectionAI[0]}"]`);
-      markBoard(selectionAI, AIinfo.turn);
+
+    timeoutID.AI = setTimeout(function () {
+      const placeAI = $(".xo-board tr").find(
+        `[data-pos="${selectionAI.join("")}"]`
+      );
+      markBoard(selectionAI);
       placeAI.html(AIinfo.marker);
       endTurn();
     }, randomTime);
@@ -256,7 +264,8 @@ function endRound() {
     return false;
   }
 }
-
+//#endregion
+//#region Win Conditions + Post turn stuff
 function popupMessage(winner) {
   let resultText = {
     h2: {
@@ -280,41 +289,30 @@ function popupMessage(winner) {
     if (AIinfo.type === "AI") {
       resText.text(resultText.h2.P1AI);
       resSubtext.text(resultText.p.win);
+      pointTracking(1);
     } else {
       resText.text(resultText.h2.P1P2);
       resSubtext.text(resultText.p.win);
+      pointTracking(1);
     }
   } else {
     if (AIinfo.type === "AI") {
       resText.text(resultText.h2.AI);
       resSubtext.text(resultText.p.lose);
+      pointTracking(2);
     } else {
       resText.text(resultText.h2.P2);
       resSubtext.text(resultText.p.win);
+      pointTracking(2);
     }
   }
-}
-
-function turnTimeout() {
-  clearInterval(intervalID.timer);
-  clearInterval(intervalID.wait);
-  circle.circleProgress({
-    value: 0,
-  });
-  timerText.text("30");
-}
-
-function markBoard(pos, player) {
-  let row = pos.slice(0, 2);
-  let col = pos.slice(-2);
-
-  accenno[row][col] = player;
+  return;
 }
 
 function boardFilled() {
   for (const row in accenno.board) {
     for (const col in accenno.board[row]) {
-      if (accenno[row][col] === 0) {
+      if (accenno.board[row][col] === 0) {
         return false;
       }
     }
@@ -382,6 +380,22 @@ function winCondition() {
   }
 }
 
+function markBoard(pos) {
+  let row;
+  let col;
+  if (jQuery.type(pos) === "array") {
+    row = pos[0];
+    col = pos[1];
+  } else {
+    row = pos.slice(0, 2);
+    col = pos.slice(2);
+  }
+  accenno.board[row][col] = accenno.turnTracker;
+  return;
+}
+//#endregion
+//#region timer functions
+
 function turnTimer() {
   let timer = 30;
 
@@ -393,31 +407,60 @@ function turnTimer() {
     timer -= 1;
     timerText.text(timer);
     if (timer === 0) {
-      turnTimeout();
+      turnTimeout(0);
     }
   }, 1000);
 }
 
+function turnTimeout(num) {
+  clearInterval(intervalID.timer);
+  clearInterval(intervalID.wait);
+  clearTimeout(timeoutID.AI);
+  clearTimeout(timeoutID.turnend);
+  circle.circleProgress({
+    value: 0,
+  });
+  timerText.text("30");
+
+  if (num === 0) {
+    toggleCover("TO");
+    endTurn();
+  }
+  return;
+}
+
+//#endregion
+//#region
 function toggleCover(arg) {
   if (!arg) {
     cover.hide();
     startMenu.hide();
     waiting.hide();
-  } else if (arg === "AI") {
-    cover.show();
-    waitForAI();
-  } else if (arg === "reset") {
-    cover.show();
-    if (accenno.roundTracker > 1) {
+    timeout.hide();
+    newRound.hide();
+    endingTurn.hide();
+  } else {
+    toggleCover();
+    if (arg === "AI") {
+      waiting.show();
+      waitForAI();
+    } else if (arg === "NR") {
       newRound.show();
-    } else {
+    } else if (arg === "TO") {
+      timeout.show();
+      waiting.show();
+      waitForAI();
+    } else if (arg === "NG") {
       startMenu.show();
+    } else if (arg === "ET") {
+      endingTurn.show();
     }
+    cover.show();
   }
+  return;
 }
 
 function waitForAI() {
-  waiting.show();
   intervalID.wait = setInterval(function () {
     const dots = $("#wait-anim");
 
@@ -428,5 +471,80 @@ function waitForAI() {
     } else {
       dots.text("");
     }
-  }, 500);
+  }, 300);
+  return;
 }
+
+function resetGame() {
+  turnTimeout();
+  resetBoard();
+  accenno.roundTracker = 1;
+
+  AIinfo.turn = 0;
+  AIinfo.marker = "";
+  AIinfo.type = "";
+  AIinfo.wins = 0;
+
+  playerInfo.turn = 0;
+  playerInfo.marker = "";
+  playerInfo.wins = 0;
+
+  $(".tally-box").css("background-color", "#fff");
+
+  toggleCover("NG");
+
+  return;
+}
+
+function resetBoard() {
+  for (const row in accenno.board) {
+    for (const col in accenno.board[row]) {
+      accenno.board[row][col] = 0;
+    }
+  }
+  gameCell.removeClass("active");
+  gameCell.addClass("empty");
+  gameCell.html("");
+
+  accenno.turnTracker = 1;
+  popup.hide();
+  return;
+}
+
+function nextRound() {
+  accenno.roundTracker += 1;
+  $("#round-num").text(accenno.roundTracker);
+  if (playerInfo.turn === 1) {
+    playerInfo.turn = 2;
+    playerInfo.marker = markXO.x;
+    AIinfo.turn = 1;
+    AIinfo.marker = markXO.o;
+  } else {
+    playerInfo.turn = 1;
+    playerInfo.marker = markXO.o;
+    AIinfo.turn = 2;
+    AIinfo.marker = markXO.x;
+  }
+  resetBoard();
+  toggleCover("NR");
+}
+
+function pointTracking(num) {
+  if (num === 1) {
+    playerInfo.wins += 1;
+    for (let i = 1; i <= playerInfo.wins; i++) {
+      $("#status-p1 .tally")
+        .find(".win-" + i)
+        .css("background-color", "#46fa76");
+    }
+  } else if (num === 2) {
+    AIinfo.wins += 1;
+    for (let i = 1; i <= AIinfo.wins; i++) {
+      $("#status-p2 .tally")
+        .find(".win-" + i)
+        .css("background-color", "#46fa76");
+    }
+  }
+}
+
+//#endregion

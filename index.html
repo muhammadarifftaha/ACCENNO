@@ -59,9 +59,7 @@
             </div>
             <div class="container">
               <button class="mainmenu-btn" data-target="AI">VS AI</button>
-              <button class="mainmenu-btn" data-target="2P" disabled>
-                VS 2P
-              </button>
+              <button class="mainmenu-btn" data-target="2P">VS 2P</button>
             </div>
           </div>
         </div>
@@ -149,11 +147,11 @@
                 <h5 class="">Player 1</h5>
 
                 <div class="container x-align tally">
-                  <div class="tally-box inbox"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box outbox"></div>
+                  <div class="tally-box inbox win-1"></div>
+                  <div class="tally-box bl-0 win-2"></div>
+                  <div class="tally-box bl-0 win-3"></div>
+                  <div class="tally-box bl-0 win-4"></div>
+                  <div class="tally-box outbox win-5"></div>
                 </div>
               </div>
               <div
@@ -162,11 +160,11 @@
               >
                 <h5 class="opponent-name">Player 2</h5>
                 <div class="container x-align tally">
-                  <div class="tally-box inbox"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box bl-0"></div>
-                  <div class="tally-box outbox"></div>
+                  <div class="tally-box inbox win-1"></div>
+                  <div class="tally-box bl-0 win-2"></div>
+                  <div class="tally-box bl-0 win-3"></div>
+                  <div class="tally-box bl-0 win-4"></div>
+                  <div class="tally-box outbox win-5"></div>
                 </div>
               </div>
             </div>
@@ -196,7 +194,8 @@
             </table>
             <div class="container accenno-cover">
               <div class="container y-align card cover-baby">
-                <div class="container x-align waiting">
+                <div class="container y-align waiting">
+                  <h4 id="timeout">Time's up!</h4>
                   <h2>AI Turn <span id="wait-anim">...</span></h2>
                 </div>
                 <div class="container y-align start-menu">
@@ -221,8 +220,11 @@
                 <div class="container y-align new-round">
                   <h6>Click the button to start a new round</h6>
                   <div class="container x-align">
-                    <button id="next-round">Start Game</button>
+                    <button id="new-round-btn">Start Game</button>
                   </div>
+                </div>
+                <div class="container y-align ending-turn">
+                  <h6>Turn Ending</h6>
                 </div>
               </div>
             </div>
@@ -239,7 +241,7 @@
             <button class="quit-btn">
               <img src="images/quit.png" alt="Quit Game" />
             </button>
-            <button>Play Again</button>
+            <button id="next-round">Play Again</button>
           </div>
         </div>
       </div>
