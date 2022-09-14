@@ -23,7 +23,29 @@ section {
   display: flex;
   flex-direction: column;
 }
-
+/* #region font-sizes */
+h1 {
+  font-size: 8rem;
+}
+h2 {
+  font-size: 5rem;
+}
+h3 {
+  font-size: 3.5rem;
+}
+h4 {
+  font-size: 3rem;
+}
+h5 {
+  font-size: 2.5rem;
+}
+h6 {
+  font-size: 2rem;
+}
+p {
+  font-size: 1.8rem;
+}
+/* #endregion */
 /*#region Header */
 header {
   background-color: #e38b29;
@@ -43,7 +65,6 @@ header {
 }
 #heading {
   font-family: "ZCOOL QingKe HuangYou", cursive;
-  font-size: 8rem;
 }
 #logo-img {
   height: 8rem;
@@ -68,7 +89,6 @@ header {
   box-shadow: 5px 5px 5px 1px rgba(53, 53, 53, 0.644);
   background-color: white;
   align-self: center;
-  font-size: 3rem;
   flex-direction: column;
   justify-content: space-evenly;
   gap: 1em;
@@ -94,21 +114,6 @@ header {
   height: 25%;
 }
 
-button {
-  font-family: "ZCOOL QingKe HuangYou", cursive;
-  font-size: 1.5vw;
-  padding: 1rem 2rem;
-  margin: 1rem;
-  border: 1px solid gray;
-  border-radius: 1rem;
-  background-color: white;
-  box-shadow: 2.5px 2.5px 5px 1px rgba(71, 71, 71, 0.644);
-}
-
-button:active {
-  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-  transform: translateY(0.1em);
-}
 .mainmenu-buttons button {
   background-image: linear-gradient(#f1a661, #ffd8a9);
 }
@@ -202,10 +207,8 @@ button:active {
   border-radius: 0 0 1rem 1rem;
   border-top: 0;
 }
-.player-turn {
-  font-size: 100%;
-}
-.marker {
+
+.xo-cell img {
   width: 80%;
 }
 
@@ -255,6 +258,23 @@ button:active {
 .cover-baby {
   width: 40%;
   height: 30%;
+}
+
+.marker-choice {
+  width: 50%;
+}
+
+.waiting {
+  font-size: 2em;
+}
+/* #endregion */
+/* #region Popup */
+.popup {
+  background-color: rgba(71, 71, 71, 0.247);
+}
+.popup-message-box {
+  padding: 2em 5em;
+  gap: 1em;
 }
 /* #endregion */
 /* #region reusable class configurations */
@@ -312,7 +332,6 @@ button:active {
   background-color: white;
 }
 .page-title {
-  font-size: 5vh;
   font-weight: 600;
   margin-bottom: 3vh;
 }
@@ -320,21 +339,40 @@ button:active {
   font-weight: 600;
 }
 
-.back-btn {
+.quit-btn.back {
   align-self: end;
   justify-self: end;
   margin: 0 2em;
 }
+.quit-btn img {
+  width: 2.5rem;
+}
+
 .horizontal-line {
   width: 80%;
   border: 1px solid grey;
 }
 
-ul,
-li {
-  list-style-type: circle;
-  padding: initial;
-  margin: initial;
+.d-rel {
+  position: relative;
+}
+.d-abs {
+  position: absolute;
+}
+button {
+  font-family: "ZCOOL QingKe HuangYou", cursive;
+  font-size: 2.5rem;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  border: 1px solid gray;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 2.5px 2.5px 5px 1px rgba(71, 71, 71, 0.644);
+}
+
+button:active {
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transform: translateY(0.1em);
 }
 
 /* #endregion */

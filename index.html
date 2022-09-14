@@ -12,7 +12,7 @@
     <!-- Title -->
     <title>ACCENNO</title>
     <!-- CSS -->
-    
+
     <link rel="stylesheet" href="assets/style.css" />
 
     <!-- JavaScript & JQuery -->
@@ -120,19 +120,21 @@
               </table>
             </div>
           </div>
-          <button class="back-btn quit-btn">Back</button>
+          <button class="quit-btn back">
+            <img src="images/quit.png" alt="Quit Game" />
+          </button>
         </div>
       </div>
     </section>
     <section id="gameboard">
-      <div class="container full-page">
+      <div class="container full-page d-rel">
         <div class="container x-align game-area card">
           <div class="container y-align status sidebar justify-around">
             <div class="container x-align turn-status">
               <div class="container" id="circle" data-value="0">
                 <p id="timer-text">30</p>
               </div>
-              <h4 class="player-turn">Your Turn</h4>
+              <h4 id="turn-text"></h4>
             </div>
             <hr class="horizontal-line" />
             <div class="container y-align w90">
@@ -169,38 +171,79 @@
               </div>
             </div>
             <div class="container x-align">
-              <button class="start-game">Start Game</button>
-              <button>Restart</button>
-              <button class="quit-btn">Quit</button>
+              <button class="quit-btn">
+                <img src="images/quit.png" alt="Quit Game" />
+              </button>
             </div>
           </div>
           <div class="container card h80 board">
             <table class="xo-board">
               <tr>
-                <td class="xo-cell empty" data-row="r1" data-col="c1"></td>
-                <td class="xo-cell empty" data-row="r1" data-col="c2"></td>
-                <td class="xo-cell empty" data-row="r1" data-col="c3"></td>
+                <td class="xo-cell empty" data-pos="r1c1"></td>
+                <td class="xo-cell empty" data-pos="r1c2"></td>
+                <td class="xo-cell empty" data-pos="r1c3"></td>
               </tr>
               <tr>
-                <td class="xo-cell empty" data-row="r2" data-col="c1"></td>
-                <td class="xo-cell empty" data-row="r2" data-col="c2"></td>
-                <td class="xo-cell empty" data-row="r2" data-col="c3"></td>
+                <td class="xo-cell empty" data-pos="r2c1"></td>
+                <td class="xo-cell empty" data-pos="r2c2"></td>
+                <td class="xo-cell empty" data-pos="r2c3"></td>
               </tr>
               <tr>
-                <td class="xo-cell empty" data-row="r3" data-col="c1"></td>
-                <td class="xo-cell empty" data-row="r3" data-col="c2"></td>
-                <td class="xo-cell empty" data-row="r3" data-col="c3"></td>
+                <td class="xo-cell empty" data-pos="r3c1"></td>
+                <td class="xo-cell empty" data-pos="r3c2"></td>
+                <td class="xo-cell empty" data-pos="r3c3"></td>
               </tr>
             </table>
             <div class="container accenno-cover">
-                <div class="container card cover-baby">
-                <h2>Click Start Game to Play</h2>
+              <div class="container y-align card cover-baby">
+                <div class="container x-align waiting">
+                  <h2>AI Turn <span id="wait-anim">...</span></h2>
                 </div>
+                <div class="container y-align start-menu">
+                  <h6>Choose a marker to Start Game</h6>
+                  <div class="container x-align">
+                    <button class="marker-buttons" data-marker="x">
+                      <img
+                        class="marker-choice"
+                        src="images/crosses.png"
+                        alt=""
+                      />
+                    </button>
+                    <button class="marker-buttons" data-marker="o">
+                      <img
+                        class="marker-choice"
+                        src="images/noughts.png"
+                        alt=""
+                      />
+                    </button>
+                  </div>
+                </div>
+                <div class="container y-align new-round">
+                  <h6>Click the button to start a new round</h6>
+                  <div class="container x-align">
+                    <button id="next-round">Start Game</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="container full-page d-abs popup">
+        <div class="container card y-align popup-message-box">
+          <h2 id="result-text">You Win!</h2>
+          <p id="result-subtext">
+            Congratulations! Click the button below to play again!
+          </p>
+          <div class="container">
+            <button class="quit-btn">
+              <img src="images/quit.png" alt="Quit Game" />
+            </button>
+            <button>Play Again</button>
           </div>
         </div>
       </div>
     </section>
+    <section id="end-game"></section>
   </body>
 </html>
