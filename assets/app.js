@@ -126,7 +126,6 @@ marker.click(chooseMarker);
 gameCell.click(toggleSelected);
 gameCell.dblclick(confirmMark);
 playAnim.click(animateHow);
-credits.click(gotoCredits);
 
 //#endregion
 
@@ -156,12 +155,6 @@ function returnToMenu() {
   }, 800);
 }
 
-function gotoCredits() {
-  $("html, body").animate(
-    { scrollTop: $("#credits-section").offset().top },
-    800
-  );
-}
 //#endregion
 //#region Animation
 function headerAnimation() {
