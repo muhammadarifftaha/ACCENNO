@@ -47,14 +47,26 @@ The game board is fairly simple using a `<table>` with borders. Each cell is equ
 
 ### Link to Resources
 
-jQuery - [https://api.jquery.com/](https://api.jquery.com/)
+- jQuery - [https://api.jquery.com/](https://api.jquery.com/)
 
-jQuery UI - [https://api.jqueryui.com/](https://api.jqueryui.com/)
+- jQuery UI - [https://api.jqueryui.com/](https://api.jqueryui.com/)
 
-[kottenator](https://github.com/kottenator)'s Radial Progress Bars - [https://github.com/kottenator/jquery-circle-progress](https://github.com/kottenator/jquery-circle-progress)
+- [kottenator](https://github.com/kottenator "kottenator's GitHub Page")'s Radial Progress Bars - [https://github.com/kottenator/jquery-circle-progress](https://github.com/kottenator/jquery-circle-progress)
 
-<details><summary>Flaticon - <a href="https://www.flaticon.com/">https://www.flaticon.com/</a></summary><br>Quit icons created by alkhalifi design - <a href="https://www.flaticon.com/free-icons/quit" title="quit icons">Link</a><br>Left click icons created by Ilham Fitrotul Hayat - <a href="https://www.flaticon.com/free-icons/left-click" title="left click icons">Link</a><br>Play button icons created by Pixel perfect - <a href="https://www.flaticon.com/free-icons/play-button" title="play button icons">Link</a><br>Line icons created by Roundicons Premium - <a href="https://www.flaticon.com/free-icons/line" title="line icons">Link</a><br>O icons created by Freepik - <a href="https://www.flaticon.com/free-icons/o" title="o icons">Link</a><br>Close icons created by ariefstudio - <a href="https://www.flaticon.com/free-icons/close" title="close icons">Link</a></details><br>
-    
-Canva - [https://www.canva.com/](https://www.canva.com/)
+- Flaticon - [https://www.flaticon.com/](https://www.flaticon.com)
+
+  - Quit icons created by alkhalifi design - [Link](https://www.flaticon.com/free-icons/quit)
+
+  - Left click icons created by Ilham Fitrotul Hayat - [Link](https://www.flaticon.com/free-icons/left-click)
+
+  - Play button icons created by Pixel perfect - [Link](https://www.flaticon.com/free-icons/play-button)
+
+  - Line icons created by Roundicons Premium - [Link](https://www.flaticon.com/free-icons/line)
+
+  - O icons created by Freepik - [Link](https://www.flaticon.com/free-icons/o)
+
+  - Close icons created by ariefstudio - [Link](https://www.flaticon.com/free-icons/close)
+
+- Canva - [https://www.canva.com/](https://www.canva.com/)
 
 <!-- the approach taken, installation instructions, unsolved problems, etc. -->
