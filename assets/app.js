@@ -53,39 +53,41 @@ const heading = $("#heading");
 const mainMenuBtn = $(".mainmenu-btn");
 const quitBtns = $(".quit-btn");
 const credits = $("#credits-btn");
+const playBtns = $("#play-btns");
+const gameMode = $("#game-mode");
 
 const cursor = $("#anim-cursor");
-const animCell = $(".xo-cell-ex");
-const howCell = $(".instruction-text div");
-const animCover = $(".accenno-cover-ex");
+const animCell = $("#xo-board-ex td");
+const howCell = $("#instruction-text div");
+const animCover = $("#accenno-cover-ex");
 const animCross = $("#anim-cross");
 const animNought = $("#anim-nought");
 const playAnim = $("#play-anim");
 
 const gameBoard = $(".xo-board");
-const gameCell = $(".xo-cell");
+const gameCell = $(".xo-board td");
 const marker = $(".marker-buttons");
 
-const cover = $(".accenno-cover");
-const startMenu = $(".start-menu");
-const waiting = $(".waiting");
+const cover = $("#accenno-cover");
+const startMenu = $("#start-menu");
+const waiting = $("#waiting");
 const timeout = $("#timeout");
-const endingTurn = $(".ending-turn");
-const newRound = $(".new-round");
+const endingTurn = $("#ending-turn");
+const newRound = $("#new-round");
 const newRoundBtn = $("#new-round-btn");
 const nextRoundbtn = $("#next-round");
 
 const circle = $("#circle");
 const timerText = $("#timer-text");
-const popup = $(".popup");
+const popup = $("#popup");
 const turnText = $("#turn-text");
 const resText = $("#result-text");
 const resSubtext = $("#result-subtext");
 
 circle.circleProgress({
   value: 0,
-  size: $(".turn-status").height() * 0.9,
-  thickness: 20,
+  size: 100,
+  thickness: 15,
   fill: {
     gradient: ["#FF4A4A", "#FF9551"],
   },
@@ -100,6 +102,8 @@ function initialise() {
   animCover.hide();
   animCross.hide();
   animNought.hide();
+  playBtns.hide();
+  gameMode.removeClass("expand", 300, "swing");
 
   intervalID.blink = setInterval(function () {
     $("#blinking-header").toggle();
@@ -112,9 +116,9 @@ function initialise() {
 //#region event listeners
 
 $(document).ready(function () {
-  setTimeout(function () {
-    $(document).scrollTop(0);
-  }, 100);
+  // setTimeout(function () {
+  //   $(document).scrollTop(0).scrollLeft(0);
+  // }, 100);
   initialise();
 });
 
@@ -132,16 +136,29 @@ credits.click(gotoCredits);
 
 //#region Navigation
 function gotoTarget() {
-  let playerType = $(this).data("target");
+  let target = $(this).data("target");
 
-  if (playerType == "how") {
+  if (target == "play") {
+    if (gameMode.hasClass("expand")) {
+      playBtns.toggle("slide", { direction: "up" }, 500, () => {
+        gameMode.toggleClass("expand", 300, "swing");
+      });
+    } else {
+      gameMode.toggleClass("expand", 300, "swing", () => {
+        playBtns.toggle("slide", { direction: "up" }, 500);
+      });
+    }
+    return;
+  } else if (target == "settings") {
+    $("html, body").animate({ scrollLeft: $("#settings").offset().left }, 800);
+  } else if (target == "how") {
     $("html, body").animate(
       { scrollTop: $("#instructions").offset().top },
       800
     );
-  } else if (playerType == "AI" || playerType == "2P") {
+  } else if (target == "AI" || target == "2P") {
     $("html, body").animate({ scrollTop: $("#gameboard").offset().top }, 800);
-    AIinfo.type = playerType;
+    AIinfo.type = target;
   }
   setTimeout(function () {
     clearInterval(intervalID.blink);
@@ -150,7 +167,7 @@ function gotoTarget() {
 }
 
 function returnToMenu() {
-  $("html, body").animate({ scrollTop: 0 }, 800);
+  $("html, body").animate({ scrollTop: 0, scrollLeft: 0 }, 800);
   setTimeout(function () {
     initialise();
   }, 800);
@@ -192,7 +209,7 @@ function animateHow() {
   };
   const firstAnim = () => {
     howCell.removeClass("active", 500, "swing");
-    $(".one").addClass("active", 500, "swing");
+    $("#one").addClass("active", 500, "swing");
 
     cursor.animate({ left: "+=100%", top: "-=100%" }, 1500);
     setTimeout(function () {
@@ -425,7 +442,7 @@ function endTurn() {
     } else {
       turns();
     }
-  }, 1250);
+  }, 500);
 }
 
 function turnAI() {
@@ -440,8 +457,6 @@ function turnAI() {
       let colAI = "c" + Math.ceil(Math.random() * 3);
       return [rowAI, colAI];
     };
-
-    let randomTime = 1000 + Math.ceil(Math.random() * 9) * 1000;
 
     let occupied = true;
     let selectionAI = chooseAI();
@@ -461,7 +476,7 @@ function turnAI() {
       markBoard(selectionAI);
       placeAI.html(AIinfo.marker);
       endTurn();
-    }, randomTime);
+    }, 3000);
   } else {
     turnText.text("P2 Turn");
     toggleCover();

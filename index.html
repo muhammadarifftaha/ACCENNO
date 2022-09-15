@@ -12,8 +12,8 @@
     <!-- Title -->
     <title>ACCENNO</title>
     <!-- CSS -->
-
-    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/jquery-ui.css" />
+    <link rel="stylesheet" href="scss/style.css" />
 
     <!-- JavaScript & JQuery -->
     <script
@@ -31,255 +31,256 @@
     <script src="assets/app.js" defer></script>
   </head>
   <body>
-    <section id="landing-section">
-      <header class="brand-top">
-        <a title="brand-logo" href="/" class="" id="link-logo">
+    <div class="two-page-level">
+      <section class="full-page-section" id="landing-section">
+        <header id="brand-top">
           <img id="logo-img" src="images/logo.png" alt="" />
-        </a>
-        <a title="brand-heading" href="/" class="brand-top" id="link-heading">
-          <h1 id="heading"></h1>
-        </a>
-        <img id="blinking-header" src="images/line.png" alt="" />
-      </header>
-      <div class="landing-page container">
-        <div class="container main-menu">
-          <div id="titlecard">
-            <img
-              src="images/full-logo-trimmed.png"
-              id="titlecard-logo"
-              alt=""
-            />
-            <h3>A Tic-Tac-Toe Game</h3>
-            <h6>by <button id="credits-btn">TAHA &copy;</button></h6>
-          </div>
-          <div class="container mainmenu-buttons y-align">
-            <div class="container">
-              <button class="mainmenu-btn" data-target="how">
+          <h1 id="heading">ACCENNO</h1>
+          <img id="blinking-header" src="images/line.png" alt="" />
+        </header>
+        <div id="landing-page">
+          <div class="card" id="main-menu">
+            <div id="titlecard">
+              <img src="images/full-logo-trimmed.png" alt="ACCENNO Logo" />
+              <h3>A Tic-Tac-Toe Game</h3>
+              <h6>by <a id="credits-btn">TAHA &copy;</a></h6>
+            </div>
+            <div id="mainmenu-buttons">
+              <div id="game-mode">
+                <button type="button" class="mainmenu-btn" data-target="play">
+                  PLAY
+                </button>
+                <div id="play-btns">
+                  <button type="button" class="mainmenu-btn" data-target="AI">
+                    P1 VS AI
+                  </button>
+                  <button type="button" class="mainmenu-btn" data-target="2P">
+                    P1 VS 2P
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="mainmenu-btn" data-target="how">
                 HOW TO PLAY
               </button>
-            </div>
-            <div class="container">
-              <button class="mainmenu-btn" data-target="AI">P1 VS AI</button>
-              <button class="mainmenu-btn" data-target="2P">P1 VS 2P</button>
+              <button type="button" class="mainmenu-btn" data-target="settings">
+                SETTINGS
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section id="instructions">
-      <div class="container y-align full-page">
-        <div class="container y-align card w80 h80">
-          <h2 class="page-title">How to play</h2>
-          <div class="container x-align instructions-anim">
-            <div class="container d-rel">
-              <table class="xo-board-ex">
-                <tr>
-                  <td class="xo-cell-ex" id="r1c1"></td>
-                  <td class="xo-cell-ex" id="r1c2"></td>
-                  <td class="xo-cell-ex" id="r1c3"></td>
-                </tr>
-                <tr>
-                  <td class="xo-cell-ex" id="r2c1"></td>
-                  <td class="xo-cell-ex anim-start anim-hover" id="r2c2">
-                    <img id="anim-cursor" src="images/cursor.png" alt="" />
-                    <img
-                      id="anim-cross"
-                      src="images/crosses.png"
-                      alt="O-mark"
-                    />
-                  </td>
-                  <td class="xo-cell-ex" id="r2c3"></td>
-                </tr>
-                <tr>
-                  <td class="xo-cell-ex" id="r3c1"></td>
-                  <td class="xo-cell-ex" id="r3c2"></td>
-                  <td class="xo-cell-ex" id="r3c3">
-                    <img
-                      id="anim-nought"
-                      src="images/noughts.png"
-                      alt="O-mark"
-                    />
-                  </td>
-                </tr>
-              </table>
+      </section>
+      <section class="full-page-section" id="settings">
+        <div class="card">
+          <div id="themes">
+            <button>ACCENNO Classic</button>
+            <button>Cat vs Dog</button>
+            <button>Sword vs Shield</button>
+            <button>iOS vs Andriod</button>
+            <button>Fire vs Water</button>
+          </div>
 
-              <div class="container accenno-cover-ex d-abs">
-                <div class="container card">
-                  <div class="container y-align waiting-ex">
-                    <h2>AI Turn <span id="wait-anim-ex">...</span></h2>
-                  </div>
+          <button type="button" class="quit-btn">
+            <img src="images/quit.png" alt="Quit Game" />
+          </button>
+        </div>
+      </section>
+    </div>
+    <section class="full-page-section" id="instructions">
+      <div class="card">
+        <h2 class="page-title">How to play</h2>
+        <div id="instructions-anim">
+          <div id="anim-window">
+            <table id="xo-board-ex">
+              <tr>
+                <td id="r1c1"></td>
+                <td id="r1c2"></td>
+                <td id="r1c3"></td>
+              </tr>
+              <tr>
+                <td id="r2c1"></td>
+                <td class="anim-start anim-hover" id="r2c2">
+                  <img id="anim-cursor" src="images/cursor.png" alt="" />
+                  <img id="anim-cross" src="images/crosses.png" alt="O-mark" />
+                </td>
+                <td id="r2c3"></td>
+              </tr>
+              <tr>
+                <td id="r3c1"></td>
+                <td id="r3c2"></td>
+                <td id="r3c3">
+                  <img id="anim-nought" src="images/noughts.png" alt="O-mark" />
+                </td>
+              </tr>
+            </table>
+
+            <div id="accenno-cover-ex">
+              <div class="card">
+                <div id="waiting-ex">
+                  <h2>AI Turn <span id="wait-anim-ex">...</span></h2>
                 </div>
               </div>
             </div>
-            <div class="container y-align instruction-text">
-              <div class="one">
-                <p>
-                  <strong
-                    >1. Select any available space to place your marker.</strong
-                  >
-                  <br />
-                  Available spaces will be highlighted as you hover over them.
-                </p>
+          </div>
+          <div id="instruction-text">
+            <div id="one">
+              <p>
+                <strong
+                  >1. Select any available space to place your marker.</strong
+                >
+                <br />
+                Available spaces will be highlighted as you hover over them.
+              </p>
+            </div>
+            <div class="two">
+              <p>
+                <strong>2. Click once to highlight the space.</strong>
+                <br />Clicking any other space will deselect your previous
+                selection. <br />
+                To deselect, click on the selected space.
+              </p>
+            </div>
+            <div class="three">
+              <p>
+                <strong>3. Double-click to confirm your selection.</strong
+                ><br />Alternatively, you can also double-click without first
+                selecting if you're confident with your selection.
+              </p>
+            </div>
+            <div class="four">
+              <p>
+                <strong>4. Wait for your turn again.</strong><br />The AI or P2
+                will take their turn. At the ned of it, it will be your turn
+                again.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="container x-align">
+          <button type="button" id="play-anim">
+            <img src="images/play.png" alt="Play Animation" />
+          </button>
+          <button type="button" class="quit-btn">
+            <img src="images/quit.png" alt="Quit Game" />
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="full-page-section" id="gameboard">
+      <div id="game-area">
+        <div id="sidebar">
+          <div class="turn-status">
+            <div id="circle" data-value="0">
+              <p id="timer-text">30</p>
+            </div>
+            <h4 id="turn-text">Testing</h4>
+          </div>
+          <hr />
+          <div id="score-section">
+            <div class="score-box" id="status-title">
+              <h4>Scoreboard</h4>
+              <h5>ROUND : <span id="round-num">1</span></h5>
+            </div>
+            <div class="score-box" id="status-p1">
+              <h5>Player 1</h5>
+
+              <div class="container x-align tally">
+                <div class="tally-box win-1"></div>
+                <div class="tally-box win-2"></div>
+                <div class="tally-box win-3"></div>
+                <div class="tally-box win-4"></div>
+                <div class="tally-box win-5"></div>
               </div>
-              <div class="two">
-                <p>
-                  <strong>2. Click once to highlight the space.</strong>
-                  <br />Clicking any other space will deselect your previous
-                  selection. <br />
-                  To deselect, click on the selected space.
-                </p>
-              </div>
-              <div class="three">
-                <p>
-                  <strong>3. Double-click to confirm your selection.</strong
-                  ><br />Alternatively, you can also double-click without first
-                  selecting if you're confident with your selection.
-                </p>
-              </div>
-              <div class="four">
-                <p>
-                  <strong>4. Wait for your turn again.</strong><br />The AI or
-                  P2 will take their turn. At the ned of it, it will be your
-                  turn again.
-                </p>
+            </div>
+            <div class="score-box" id="status-p2">
+              <h5 class="opponent-name">Player 2</h5>
+              <div class="container x-align tally">
+                <div class="tally-box inbox win-1"></div>
+                <div class="tally-box win-2"></div>
+                <div class="tally-box win-3"></div>
+                <div class="tally-box win-4"></div>
+                <div class="tally-box outbox win-5"></div>
               </div>
             </div>
           </div>
           <div class="container x-align">
-            <button type="button" id="play-anim">
-              <img src="images/play.png" alt="Play Animation" />
-            </button>
-            <button type="button" class="quit-btn">
+            <button class="quit-btn">
               <img src="images/quit.png" alt="Quit Game" />
             </button>
           </div>
         </div>
-      </div>
-    </section>
-    <section id="gameboard">
-      <div class="container full-page d-rel">
-        <div class="container x-align game-area card">
-          <div class="container y-align status sidebar justify-around">
-            <div class="container x-align turn-status">
-              <div class="container" id="circle" data-value="0">
-                <p id="timer-text">30</p>
+        <div class="card" id="board">
+          <table class="xo-board">
+            <tr>
+              <td class="empty" data-pos="r1c1"></td>
+              <td class="empty" data-pos="r1c2"></td>
+              <td class="empty" data-pos="r1c3"></td>
+            </tr>
+            <tr>
+              <td class="empty" data-pos="r2c1"></td>
+              <td class="empty" data-pos="r2c2"></td>
+              <td class="empty" data-pos="r2c3"></td>
+            </tr>
+            <tr>
+              <td class="empty" data-pos="r3c1"></td>
+              <td class="empty" data-pos="r3c2"></td>
+              <td class="empty" data-pos="r3c3"></td>
+            </tr>
+          </table>
+          <div id="accenno-cover">
+            <div id="cover-baby">
+              <div id="waiting">
+                <h4 id="timeout">Time's up!</h4>
+                <h2>AI Turn <span id="wait-anim">...</span></h2>
               </div>
-              <h4 id="turn-text"></h4>
-            </div>
-            <hr class="horizontal-line" />
-            <div class="container y-align w90">
-              <div class="container y-align score-section" id="status-title">
-                <h4 class="">Scoreboard</h4>
-                <h5>ROUND : <span id="round-num">1</span></h5>
-              </div>
-              <div
-                class="container x-align score-section justify-evenly"
-                id="status-p1"
-              >
-                <h5 class="">Player 1</h5>
-
-                <div class="container x-align tally">
-                  <div class="tally-box inbox win-1"></div>
-                  <div class="tally-box bl-0 win-2"></div>
-                  <div class="tally-box bl-0 win-3"></div>
-                  <div class="tally-box bl-0 win-4"></div>
-                  <div class="tally-box outbox win-5"></div>
+              <div id="start-menu">
+                <h6>Choose a marker to Start Game</h6>
+                <div>
+                  <button
+                    type="button"
+                    title="crosses"
+                    class="marker-buttons"
+                    data-marker="x"
+                  >
+                    <img
+                      class="marker-choice"
+                      src="images/crosses.png"
+                      alt="Crosses/X"
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    title="noughts"
+                    class="marker-buttons"
+                    data-marker="o"
+                  >
+                    <img
+                      class="marker-choice"
+                      src="images/noughts.png"
+                      alt="Noughts/O"
+                    />
+                  </button>
                 </div>
               </div>
-              <div
-                class="container x-align score-section justify-evenly"
-                id="status-p2"
-              >
-                <h5 class="opponent-name">Player 2</h5>
-                <div class="container x-align tally">
-                  <div class="tally-box inbox win-1"></div>
-                  <div class="tally-box bl-0 win-2"></div>
-                  <div class="tally-box bl-0 win-3"></div>
-                  <div class="tally-box bl-0 win-4"></div>
-                  <div class="tally-box outbox win-5"></div>
+              <div id="new-round">
+                <h6>Click the button to start a new round</h6>
+                <div class="container x-align">
+                  <button id="new-round-btn">Start Game</button>
                 </div>
               </div>
-            </div>
-            <div class="container x-align">
-              <button class="quit-btn">
-                <img src="images/quit.png" alt="Quit Game" />
-              </button>
-            </div>
-          </div>
-          <div class="container card h80 board">
-            <table class="xo-board">
-              <tr>
-                <td class="xo-cell empty" data-pos="r1c1"></td>
-                <td class="xo-cell empty" data-pos="r1c2"></td>
-                <td class="xo-cell empty" data-pos="r1c3"></td>
-              </tr>
-              <tr>
-                <td class="xo-cell empty" data-pos="r2c1"></td>
-                <td class="xo-cell empty" data-pos="r2c2"></td>
-                <td class="xo-cell empty" data-pos="r2c3"></td>
-              </tr>
-              <tr>
-                <td class="xo-cell empty" data-pos="r3c1"></td>
-                <td class="xo-cell empty" data-pos="r3c2"></td>
-                <td class="xo-cell empty" data-pos="r3c3"></td>
-              </tr>
-            </table>
-            <div class="container accenno-cover">
-              <div class="container y-align card cover-baby">
-                <div class="container y-align waiting">
-                  <h4 id="timeout">Time's up!</h4>
-                  <h2>AI Turn <span id="wait-anim">...</span></h2>
-                </div>
-                <div class="container y-align start-menu">
-                  <h6>Choose a marker to Start Game</h6>
-                  <div class="container x-align">
-                    <button
-                      type="button"
-                      title="crosses"
-                      class="marker-buttons"
-                      data-marker="x"
-                    >
-                      <img
-                        class="marker-choice"
-                        src="images/crosses.png"
-                        alt="Crosses/X"
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      title="noughts"
-                      class="marker-buttons"
-                      data-marker="o"
-                    >
-                      <img
-                        class="marker-choice"
-                        src="images/noughts.png"
-                        alt="Noughts/O"
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div class="container y-align new-round">
-                  <h6>Click the button to start a new round</h6>
-                  <div class="container x-align">
-                    <button id="new-round-btn">Start Game</button>
-                  </div>
-                </div>
-                <div class="container y-align ending-turn">
-                  <h6>Turn Ending</h6>
-                </div>
+              <div id="ending-turn">
+                <h6>Turn Ending</h6>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="container full-page d-abs popup">
-        <div class="container card y-align popup-message-box">
+      <div id="popup">
+        <div id="popup-message-box">
           <h2 id="result-text">You Win!</h2>
           <p id="result-subtext">
             Congratulations! Click the button below to play again!
           </p>
-          <div class="container">
+          <div>
             <button class="quit-btn">
               <img src="images/quit.png" alt="Quit Game" />
             </button>
@@ -288,13 +289,11 @@
         </div>
       </div>
     </section>
-    <section id="credits-section">
-      <div class="container full-page">
-        <div class="container x-align card h80 w80">
-          <button type="button" class="quit-btn">
-            <img src="images/quit.png" alt="Quit Game" />
-          </button>
-        </div>
+    <section class="full-page-section" id="credits-section">
+      <div class="card">
+        <button type="button" class="quit-btn">
+          <img src="images/quit.png" alt="Quit Game" />
+        </button>
       </div>
     </section>
   </body>
