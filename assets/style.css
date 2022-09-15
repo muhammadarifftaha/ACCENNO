@@ -14,7 +14,7 @@ font-family: 'ZCOOL QingKe HuangYou', cursive;
 html {
   background-color: #fdeedc;
   font-size: 1vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 section {
@@ -23,7 +23,7 @@ section {
   display: flex;
   flex-direction: column;
 }
-/* #region font-sizes */
+/* #region font css */
 h1 {
   font-size: 8rem;
 }
@@ -44,6 +44,9 @@ h6 {
 }
 p {
   font-size: 1.8rem;
+}
+strong {
+  font-weight: 600;
 }
 /* #endregion */
 /*#region Header */
@@ -144,29 +147,43 @@ header {
   background-color: white;
 }
 
-.xo-cell.empty:hover {
-  background-color: #fdeedc;
-}
-
-.xo-cell.empty.active {
-  background-color: #ffd8a9;
+.accenno-cover-ex {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(29, 29, 29, 0.5);
 }
 
 .instructions-anim {
   gap: 5em;
 }
-.instruction-text td {
+.container.instruction-text {
   padding: 0.5vh 1vw;
   border-radius: 0.25em;
   font-size: 3em;
+  align-items: flex-start;
 }
-.instruction-text td.active {
+.instruction-text div {
+  padding: 1rem 2rem;
+  border-radius: 1.5rem;
+}
+.instruction-text .active {
   background-color: #f1a661;
 }
-
+.anim-start {
+  position: relative;
+}
 #anim-cursor {
   position: absolute;
-  height: 7vh;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+}
+.anim-hover {
+  background-color: #fdeedc;
+}
+.anim-click {
+  background-color: #ffd8a9;
 }
 /* #endregion */
 /* #region Game Area */
@@ -208,6 +225,15 @@ header {
   border-top: 0;
 }
 
+.xo-cell.empty:hover {
+  background-color: #fdeedc;
+}
+
+.xo-cell.empty.active {
+  background-color: #ffd8a9;
+}
+
+.xo-cell-ex img,
 .xo-cell img {
   width: 80%;
 }
@@ -248,6 +274,7 @@ header {
 .board {
   position: relative;
 }
+
 .accenno-cover {
   position: absolute;
   width: 100%;
@@ -267,6 +294,10 @@ header {
 .waiting {
   font-size: 2em;
 }
+.waiting-ex {
+  font-size: 2em;
+  padding: 1em 2em;
+}
 /* #endregion */
 /* #region Popup */
 .popup {
@@ -275,6 +306,23 @@ header {
 .popup-message-box {
   padding: 2em 5em;
   gap: 1em;
+}
+/* #endregion */
+/* #region Credits */
+
+button#credits-btn {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 0 transparent;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: #c7710e;
+}
+button#credits-btn:hover {
+  color: #f1a661;
 }
 /* #endregion */
 /* #region reusable class configurations */
@@ -335,16 +383,8 @@ header {
   font-weight: 600;
   margin-bottom: 3vh;
 }
-.list-num {
-  font-weight: 600;
-}
 
-.quit-btn.back {
-  align-self: end;
-  justify-self: end;
-  margin: 0 2em;
-}
-.quit-btn img {
+button img {
   width: 2.5rem;
 }
 
@@ -368,6 +408,16 @@ button {
   border-radius: 1rem;
   background-color: white;
   box-shadow: 2.5px 2.5px 5px 1px rgba(71, 71, 71, 0.644);
+}
+
+button:disabled {
+  background-color: gray;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  transform: translateY(0.1em);
+}
+
+button:disabled:active {
+  transform: translateY(0);
 }
 
 button:active {
