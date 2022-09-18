@@ -1,8 +1,8 @@
 //#region Global Variables
 const intervalID = { timer: 0, wait: 0, blink: 0, animHow: 0 };
 const timeoutID = { AI: 0, turnend: 0, animation: 0 };
-const playerInfo = { marker: "", turn: 0, wins: 0 };
-const AIinfo = { type: "AI", marker: "", turn: 0, wins: 0 };
+const playerInfo = { name: "", marker: "", turn: 0, wins: 0 };
+const AIinfo = { name: "", type: "AI", marker: "", turn: 0, wins: 0 };
 const gameThemes = {
   classic: {
     o: '<img src="images/themes/accenno-noughts.png" alt="O mark">',
@@ -19,6 +19,16 @@ const gameThemes = {
     x: '<img src="images/themes/catdog-dog.png" alt="X Dog">',
     circle: ["#ffa600", "#ffd500"],
   },
+  swordshield: {
+    o: '<img src="images/themes/swordshield-shield.png" alt="X Sheild">',
+    x: '<img src="images/themes/swordshield-sword.png" alt="O Sword">',
+    circle: ["#50796d", "#a7d6b6"],
+  },
+  karenkevin: {
+    o: '<img src="images/themes/karenkevin-karen.png" alt="O Karen">',
+    x: '<img src="images/themes/karenkevin-kevin.png" alt="X Kevin">',
+    circle: ["#0fa7ff", "#c7e7f5"],
+  },
 };
 const accenno = {
   board: {
@@ -28,7 +38,7 @@ const accenno = {
   },
   turnTracker: 1,
   roundTracker: 1,
-  theme: "default",
+  theme: "classic",
 };
 
 //#endregion
@@ -43,8 +53,9 @@ const accenno = {
       } else {
         this.html(AIinfo.marker);
       }
+      return true;
     }
-    return this;
+    return false;
   };
   $.fn.animClick = function () {
     if (!this.attr("src")) {
@@ -133,10 +144,11 @@ function initialise() {
 //#region event listeners
 
 $(document).ready(function () {
-  // setTimeout(function () {
-  //   $(document).scrollTop(0).scrollLeft(0);
-  // }, 100);
+  setTimeout(function () {
+    $(document).scrollTop(0).scrollLeft(0);
+  }, 100);
   titleAnim.hide();
+  $(".banner").hide();
   initialise();
 });
 
@@ -442,9 +454,11 @@ function toggleSelected() {
 }
 
 function confirmMark() {
-  $(this).placeMarker();
-  markBoard($(this).data("pos"));
-  endTurn();
+  if ($(this).placeMarker()) {
+    $(this).placeMarker();
+    markBoard($(this).data("pos"));
+    endTurn();
+  }
 }
 
 function endTurn() {
@@ -461,7 +475,7 @@ function endTurn() {
     } else {
       turns();
     }
-  }, 500);
+  }, 450);
 }
 
 function turnAI() {
@@ -469,7 +483,9 @@ function turnAI() {
 
   if (AIinfo.type === "AI") {
     turnText.text("AI Turn");
-    toggleCover("AI");
+    setTimeout(() => {
+      toggleCover("AI");
+    }, 500);
 
     const chooseAI = () => {
       let rowAI = "r" + Math.ceil(Math.random() * 3);
@@ -494,6 +510,7 @@ function turnAI() {
       );
       markBoard(selectionAI);
       placeAI.html(AIinfo.marker);
+      placeAI.removeClass("empty");
       endTurn();
     }, 3000);
   } else {
@@ -806,14 +823,7 @@ function pointTracking(num) {
 }
 
 //#endregion
-//#region settings
-$(function () {
-  $("#p2name").tooltip({
-    content: "Player 2 Name only applies in vs P2 games",
-  });
-});
 
-//#region
 //#region Themes
 
 function themes() {
@@ -833,8 +843,19 @@ function themes() {
   if (accenno.theme === "catdog") {
     titleAnim.show();
     $("#catdog-animation").show();
+  } else if (accenno.theme === "swordshield") {
+    $(".banner").show();
+    $("#catdog-animation").hide();
   } else {
     $("#catdog-animation").hide();
+    $(".banner").hide();
     titleAnim.hide();
   }
+
+  setTimeout(() => {
+    $("html, body").animate({ scrollTop: 0, scrollLeft: 0 }, 800);
+  }, 500);
 }
+
+//#endregion
+//#region Personalisation

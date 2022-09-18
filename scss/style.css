@@ -8,6 +8,7 @@
 
 html {
   font-size: 1vh;
+  overflow: hidden;
 }
 
 body {
@@ -329,14 +330,7 @@ hr {
 }
 
 #turn-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap: 1em;
+  gap: 3em;
 }
 
 #circle {
@@ -514,6 +508,14 @@ hr {
   padding: 1em 2em;
 }
 
+.ui-tooltip {
+  background-color: black;
+  color: white;
+  font-size: 1.75rem;
+  width: 20em;
+  border-radius: 0.5em;
+}
+
 #settings {
   justify-content: space-around;
 }
@@ -522,12 +524,40 @@ hr {
   flex-direction: row;
   width: 80%;
   height: 70%;
+  flex-wrap: wrap;
 }
-#settings #settings-box #themes {
+#settings #settings-box > button, #settings #main-menu #mainmenu-buttons #settings-box > button {
+  flex: 0 0 20%;
+}
+#settings #settings-box #themes-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
   flex-direction: column;
-  align-items: flex-start;
   width: 40%;
   height: 70%;
+}
+#settings #settings-box #themes-box #themes {
+  flex-direction: column;
+  width: 75%;
+  height: 80%;
+  gap: 1em;
+}
+#settings #settings-box #themes-box #themes > div {
+  width: 100%;
+  height: 15%;
+}
+#settings #settings-box #themes-box #themes > div button {
+  width: 70%;
+  height: 100%;
+}
+#settings #settings-box #themes-box #themes > div img {
+  width: auto;
+  height: 70%;
+  border: 1px solid gray;
+  border-radius: 0.75em;
+  padding: 2.5%;
 }
 #settings #settings-box #other-settings {
   display: flex;
@@ -600,35 +630,19 @@ hr {
   background-color: #000;
 }
 .sunmoon #gameboard {
-  background-image: url("../images/background/sunmoon-game-bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url("../images/background/sunmoon-game-bg.jpg") center/cover no-repeat;
 }
 .sunmoon #gameboard #board {
-  background-image: url("../images/background/sunmoon-game-bg.jpg");
+  background: url("../images/background/sunmoon-game-bg.jpg") center/cover no-repeat;
 }
-.sunmoon #gameboard table {
-  display: table;
-  height: 50vh;
-  width: 50vh;
-  border-collapse: collapse;
-}
-.sunmoon #gameboard table img {
-  width: 80%;
-}
-.sunmoon #gameboard table td {
-  display: table-cell;
-  text-align: center;
-  width: 30%;
-  height: 30%;
+.sunmoon #gameboard #board td {
   border: 2px solid white;
   background-color: transparent;
 }
-.sunmoon #gameboard table td.empty:hover {
+.sunmoon #gameboard #board td.empty:hover {
   background-color: #8fa3ff;
 }
-.sunmoon #gameboard table td.empty.active {
+.sunmoon #gameboard #board td.empty.active {
   background-color: #4a6bff;
 }
 .sunmoon #instructions {
@@ -670,27 +684,14 @@ hr {
 .catdog #gameboard #board {
   background: #ffedbd url("../images/background/catdog.png") center no-repeat;
 }
-.catdog #gameboard table {
-  display: table;
-  height: 50vh;
-  width: 50vh;
-  border-collapse: collapse;
-}
-.catdog #gameboard table img {
-  width: 80%;
-}
-.catdog #gameboard table td {
-  display: table-cell;
-  text-align: center;
-  width: 30%;
-  height: 30%;
+.catdog #gameboard #board td {
   border: 2px solid white;
   background-color: transparent;
 }
-.catdog #gameboard table td.empty:hover {
+.catdog #gameboard #board td.empty:hover {
   background-color: #8fa3ff;
 }
-.catdog #gameboard table td.empty.active {
+.catdog #gameboard #board td.empty.active {
   background-color: #4a6bff;
 }
 .catdog #instructions {
@@ -749,4 +750,101 @@ hr {
 }
 .catdog #landing-section #mainmenu-buttons button:hover {
   background: linear-gradient(#ffd68b, #ffd500);
+}
+
+.swordshield {
+  background-color: #b0faa6;
+}
+.swordshield #gameboard #board {
+  background: url("../images/background/swordshield-game-bg.jpg") center/cover no-repeat;
+}
+.swordshield #gameboard #board td {
+  border: 2px solid white;
+  background-color: transparent;
+}
+.swordshield #gameboard #board td.empty:hover {
+  background-color: #ceecc3;
+}
+.swordshield #gameboard #board td.empty.active {
+  background-color: #8ac873;
+}
+.swordshield #instructions {
+  background: #65c07d;
+}
+.swordshield #instructions #xo-board-ex .anim-click {
+  background-color: #8ac873;
+}
+.swordshield #instructions #xo-board-ex .anim-hover {
+  background-color: #ceecc3;
+}
+.swordshield .card, .swordshield #game-area, .swordshield #cover-baby, .swordshield #popup-message-box {
+  background-color: rgba(255, 255, 255, 0.8980392157);
+}
+.swordshield #landing-section #landing-page {
+  background: url("../images/background/swordshield-bg.jpg") center/cover no-repeat;
+}
+.swordshield #landing-section #brand-top {
+  background: #0b313a;
+  color: white;
+}
+.swordshield #landing-section #brand-top img {
+  filter: invert(1);
+}
+.swordshield #landing-section #credits-btn {
+  color: #65c07d !important;
+}
+.swordshield #landing-section #mainmenu-buttons button {
+  color: black;
+  background: linear-gradient(#65c07d, #8ac873);
+}
+.swordshield #landing-section #mainmenu-buttons button:hover {
+  background: linear-gradient(#8ac873, #ceecc3);
+}
+
+.karenkevin {
+  background-color: #fff;
+}
+.karenkevin #gameboard {
+  background: #c4f1ff;
+}
+.karenkevin #gameboard #board {
+  background: url("../images/background/karenkevin-game-bg.jpg") center/cover no-repeat;
+}
+.karenkevin #gameboard #board td {
+  border: 2px solid black;
+  background-color: transparent;
+}
+.karenkevin #gameboard #board td.empty:hover {
+  background-color: #b0edff;
+}
+.karenkevin #gameboard #board td.empty.active {
+  background-color: #5cd9ff;
+}
+.karenkevin #instructions {
+  background-color: #98f0f7;
+}
+.karenkevin #instructions #xo-board-ex .anim-click {
+  background-color: #5cd9ff;
+}
+.karenkevin #instructions #xo-board-ex .anim-hover {
+  background-color: #b0edff;
+}
+.karenkevin .card, .karenkevin #game-area, .karenkevin #cover-baby, .karenkevin #popup-message-box {
+  background: rgba(255, 255, 255, 0.9);
+}
+.karenkevin #landing-section {
+  background: url("../images/background/karenkevin-bg.jpg") center/cover no-repeat;
+}
+.karenkevin #landing-section #brand-top {
+  background: #c7e7f5;
+  color: black;
+}
+.karenkevin #landing-section #credits-btn {
+  color: #0fc7ff !important;
+}
+.karenkevin #landing-section #mainmenu-buttons button {
+  background-image: linear-gradient(#b0edff, #0fa7ff);
+}
+.karenkevin #landing-section #mainmenu-buttons button:hover {
+  background-image: linear-gradient(#ffffff, #b0edff);
 }/*# sourceMappingURL=style.css.map */

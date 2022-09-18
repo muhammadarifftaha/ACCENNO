@@ -12,6 +12,7 @@
     <!-- Title -->
     <title>ACCENNO</title>
     <!-- CSS -->
+    <link rel="stylesheet" href="assets/jquery-ui.structure.css" />
     <link rel="stylesheet" href="assets/jquery-ui.css" />
     <link rel="stylesheet" href="scss/style.css" />
 
@@ -79,41 +80,36 @@
       <section class="full-page-section" id="settings">
         <div class="card">
           <div id="settings-box">
-            <div id="themes">
+            <div id="themes-box">
               <h4>Themes</h4>
-              <button data-theme="classic">ACCENNO Classic</button>
-              <button data-theme="catdog">Cat vs Dog</button>
-              <button data-theme="swordshield">Sword vs Shield</button>
-              <button data-theme="sunmoon">Sun vs Moon</button>
-              <button data-theme="firewater">Fire vs Water</button>
+              <div id="themes">
+                <div>
+                  <button data-theme="classic">ACCENNO Classic</button>
+                  <img src="images/themes/accenno-crosses.png" alt="" />
+                  <img src="images/themes/accenno-noughts.png" alt="" />
+                </div>
+                <div>
+                  <button data-theme="catdog">Cat vs Dog</button>
+                  <img src="images/themes/catdog-cat.png" alt="" />
+                  <img src="images/themes/catdog-dog.png" alt="" />
+                </div>
+                <div>
+                  <button data-theme="swordshield">Sword vs Shield</button>
+                  <img src="images/themes/swordshield-sword.png" alt="" />
+                  <img src="images/themes/swordshield-shield.png" alt="" />
+                </div>
+                <div>
+                  <button data-theme="sunmoon">Sun vs Moon</button>
+                  <img src="images/themes/sunmoon-sun.png" alt="" />
+                  <img src="images/themes/sunmoon-moon.png" alt="" />
+                </div>
+                <div>
+                  <button data-theme="karenkevin">Karen vs Kevin</button>
+                  <img src="images/themes/karenkevin-karen.png" alt="" />
+                  <img src="images/themes/karenkevin-kevin.png" alt="" />
+                </div>
+              </div>
             </div>
-
-            <form id="other-settings">
-              <h4 style="align-self: start">Personalisation Settings</h4>
-              <div class="input-group">
-                <label for="p1-name">Player 1 Name</label>
-                <input type="text" name="p1-name" />
-              </div>
-              <div class="input-group">
-                <label for="p2-name">Player 2 Name</label>
-                <input type="text" name="p2-name" id="p2name" />
-              </div>
-              <div class="input-group">
-                <label for="rounds" id="rounds-label"
-                  >Max number of rounds</label
-                >
-                <select name="rounds" id="no-of-rounds">
-                  <option value="3">3</option>
-                  <option value="5">5</option>
-                  <option value="7">7</option>
-                  <option value="0">Endless</option>
-                </select>
-              </div>
-              <div class="input-group">
-                <label for="name">Player 1 Name</label>
-                <input type="text" />
-              </div>
-            </form>
 
             <button type="button" class="quit-btn">
               <img src="images/quit.png" alt="Quit Game" />
@@ -214,7 +210,7 @@
     <section class="full-page-section" id="gameboard">
       <div id="game-area">
         <div id="sidebar">
-          <div class="turn-status">
+          <div id="turn-status">
             <div id="circle" data-value="0">
               <p id="timer-text">30</p>
             </div>
@@ -335,13 +331,6 @@
             <button id="next-round">Play Again</button>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="full-page-section" id="credits-section">
-      <div class="card">
-        <button type="button" class="quit-btn">
-          <img src="images/quit.png" alt="Quit Game" />
-        </button>
       </div>
     </section>
   </body>

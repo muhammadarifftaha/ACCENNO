@@ -36,13 +36,17 @@ $other-font: "Quicksand", sans-serif
 
 @mixin wh($width,$height)
 
-  @if $width == auto
-    width: auto
+  @if type-of($width) != number
+    width: #{$width}
     height: #{$height* 1%}
 
-  @else if $height == auto
+  @else if type-of($height) != number
     width: #{$width* 1%}
-    height: auto
+    height: #{$height}
+
+  @else if type-of($width) != number and type-of($height) == number
+    width: #{$width}
+    height: #{$height}
 
   @else
     width: #{$width* 1%}
@@ -57,7 +61,7 @@ $other-font: "Quicksand", sans-serif
 
 html
   font-size: 1vh
-  // overflow: hidden
+  overflow: hidden
 
 body
   @include flex-container
@@ -198,7 +202,7 @@ hr
 
   #titlecard
     @include y-align
-    @include wh(100,100 )
+    @include wh(100,100)
 
     a#credits-btn
       color: #c7710e
@@ -304,10 +308,7 @@ hr
   margin-right: 0
 
 #turn-status
-  @include flex-container
-  @include y-align
-  @include wh(100,100)
-  gap: 1em
+  gap: 3em
 
 #circle
   @include flex-container
@@ -426,18 +427,46 @@ hr
   font-size: 2em
   padding: 1em 2em
 
+.ui-tooltip
+  background-color: black
+  color: white
+  font-size: 1.75rem
+  width: 20em
+  border-radius: 0.5em
+
 #settings
   @include justify-around
 
   #settings-box
     @include justify-evenly
     @include x-align
-    @include wh(80,70 )
+    @include wh(80,70)
+    flex-wrap: wrap
 
-    #themes
+    &>button
+      flex: 0 0 20%
+
+    #themes-box
+      @include flex-container
       @include y-align
-      @include align-start
       @include wh(40,70)
+
+      #themes
+        @include y-align
+        @include wh(75,80)
+        gap: 1em
+
+        &>div
+          @include wh(100,15)
+
+          button
+            @include wh(70,100 )
+
+          img
+            @include wh(auto,70)
+            border: 1px solid gray
+            border-radius: 0.75em
+            padding: 2.5%
 
     #other-settings
       @include flex-container
@@ -493,28 +522,12 @@ hr
   background-color: #000
 
   & #gameboard
-    background-image: url("../images/background/sunmoon-game-bg.jpg")
-    background-position: center
-    background-repeat: no-repeat
-    background-size: cover
+    background: url("../images/background/sunmoon-game-bg.jpg") center/ cover no-repeat
 
     #board
-      background-image: url("../images/background/sunmoon-game-bg.jpg")
-
-    & table
-      display: table
-      height: 50vh
-      width: 50vh
-      border-collapse: collapse
-
-      & img
-        width: 80%
+      background: url("../images/background/sunmoon-game-bg.jpg") center/ cover no-repeat
 
       & td
-        display: table-cell
-        text-align: center
-        width: 30%
-        height: 30%
         border: 2px solid white
         background-color: transparent
 
@@ -569,20 +582,7 @@ hr
     #board
       background: #ffedbd url('../images/background/catdog.png') center no-repeat
 
-    & table
-      display: table
-      height: 50vh
-      width: 50vh
-      border-collapse: collapse
-
-      & img
-        width: 80%
-
       & td
-        display: table-cell
-        text-align: center
-        width: 30%
-        height: 30%
         border: 2px solid white
         background-color: transparent
 
@@ -644,3 +644,110 @@ hr
 
         &:hover
           background: linear-gradient(#ffd68b,#ffd500)
+
+.swordshield
+  background-color: #b0faa6
+
+  & #gameboard
+
+    #board
+      background: url('../images/background/swordshield-game-bg.jpg') center/cover no-repeat
+
+      & td
+        border: 2px solid white
+        background-color: transparent
+
+        &.empty:hover
+          background-color: #ceecc3
+
+        &.empty.active
+          background-color: #8ac873
+
+  & #instructions
+    background: #65c07d
+
+    & #xo-board-ex
+
+      & .anim-click
+        background-color: #8ac873
+
+      & .anim-hover
+        background-color: #ceecc3
+
+  & .card
+    background-color: #ffffffe5
+
+  & #landing-section
+
+    #landing-page
+      background: url('../images/background/swordshield-bg.jpg') center/ cover no-repeat
+
+    & #brand-top
+      background: #0b313a
+      color: white
+
+      img
+        filter: invert(1)
+
+    & #credits-btn
+      color: #65c07d!important
+
+    & #mainmenu-buttons
+
+      & button
+        color: black
+        background: linear-gradient(#65c07d,#8ac873)
+
+        &:hover
+          background: linear-gradient(#8ac873,#ceecc3)
+
+.karenkevin
+  background-color: #fff
+
+  & #gameboard
+    background: #c4f1ff
+
+    #board
+      background: url("../images/background/karenkevin-game-bg.jpg") center/ cover no-repeat
+
+      & td
+        border: 2px solid black
+        background-color: transparent
+
+        &.empty:hover
+          background-color: #b0edff
+
+        &.empty.active
+          background-color: #5cd9ff
+
+  & #instructions
+    background-color: #98f0f7
+
+    & #xo-board-ex
+
+      & .anim-click
+        background-color: #5cd9ff
+
+      & .anim-hover
+        background-color: #b0edff
+
+  & .card
+    background: rgba(255,255 ,255 ,0.9)
+
+  & #landing-section
+    background: url('../images/background/karenkevin-bg.jpg') center/cover no-repeat
+
+    & #brand-top
+      background: #c7e7f5
+      color: black
+
+    & #credits-btn
+      color: #0fc7ff!important
+
+    & #mainmenu-buttons
+      & button
+
+        background-image: linear-gradient(#b0edff, #0fa7ff)
+
+        &:hover
+          background-image: linear-gradient(#ffffff,#b0edff)
