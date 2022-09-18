@@ -3,9 +3,22 @@ const intervalID = { timer: 0, wait: 0, blink: 0, animHow: 0 };
 const timeoutID = { AI: 0, turnend: 0, animation: 0 };
 const playerInfo = { marker: "", turn: 0, wins: 0 };
 const AIinfo = { type: "AI", marker: "", turn: 0, wins: 0 };
-const markXO = {
-  o: '<img src="images/noughts.png" alt="O-mark" />',
-  x: '<img src="images/crosses.png" alt="X-mark" />',
+const gameThemes = {
+  classic: {
+    o: '<img src="images/themes/accenno-noughts.png" alt="O mark">',
+    x: '<img src="images/themes/accenno-crosses.png" alt="X mark">',
+    circle: ["#FF4A4A", "#FF9551"],
+  },
+  sunmoon: {
+    o: '<img src="images/themes/sunmoon-sun.png" alt="O Sun">',
+    x: '<img src="images/themes/sunmoon-moon.png" alt="X Moon">',
+    circle: ["#000000", "#001d9c"],
+  },
+  catdog: {
+    o: '<img src="images/themes/catdog-cat.png" alt="O Cat">',
+    x: '<img src="images/themes/catdog-dog.png" alt="X Dog">',
+    circle: ["#ffa600", "#ffd500"],
+  },
 };
 const accenno = {
   board: {
@@ -15,6 +28,7 @@ const accenno = {
   },
   turnTracker: 1,
   roundTracker: 1,
+  theme: "default",
 };
 
 //#endregion
@@ -56,6 +70,9 @@ const credits = $("#credits-btn");
 const playBtns = $("#play-btns");
 const gameMode = $("#game-mode");
 
+const themesBtn = $("#themes button");
+const titleAnim = $("#title-anim");
+
 const cursor = $("#anim-cursor");
 const animCell = $("#xo-board-ex td");
 const howCell = $("#instruction-text div");
@@ -86,7 +103,7 @@ const resSubtext = $("#result-subtext");
 
 circle.circleProgress({
   value: 0,
-  size: 100,
+  size: 150,
   thickness: 15,
   fill: {
     gradient: ["#FF4A4A", "#FF9551"],
@@ -119,6 +136,7 @@ $(document).ready(function () {
   // setTimeout(function () {
   //   $(document).scrollTop(0).scrollLeft(0);
   // }, 100);
+  titleAnim.hide();
   initialise();
 });
 
@@ -131,6 +149,7 @@ gameCell.click(toggleSelected);
 gameCell.dblclick(confirmMark);
 playAnim.click(animateHow);
 credits.click(gotoCredits);
+themesBtn.click(themes);
 
 //#endregion
 
@@ -386,13 +405,13 @@ function toggleHoverClick(id) {
 //#endregion
 //#region Game Algorithm
 function chooseMarker() {
-  playerInfo.marker = markXO[$(this).data("marker")];
-  if (playerInfo.marker === markXO.o) {
-    AIinfo.marker = markXO.x;
+  playerInfo.marker = gameThemes[accenno.theme][$(this).data("marker")];
+  if (playerInfo.marker === gameThemes[accenno.theme].o) {
+    AIinfo.marker = gameThemes[accenno.theme].x;
     playerInfo.turn = 1;
     AIinfo.turn = 2;
   } else {
-    AIinfo.marker = markXO.o;
+    AIinfo.marker = gameThemes[accenno.theme].o;
     playerInfo.turn = 2;
     AIinfo.turn = 1;
   }
@@ -755,14 +774,14 @@ function nextRound() {
   $("#round-num").text(accenno.roundTracker);
   if (playerInfo.turn === 1) {
     playerInfo.turn = 2;
-    playerInfo.marker = markXO.x;
+    playerInfo.marker = gameThemes[accenno.theme].x;
     AIinfo.turn = 1;
-    AIinfo.marker = markXO.o;
+    AIinfo.marker = gameThemes[accenno.theme].o;
   } else {
     playerInfo.turn = 1;
-    playerInfo.marker = markXO.o;
+    playerInfo.marker = gameThemes[accenno.theme].o;
     AIinfo.turn = 2;
-    AIinfo.marker = markXO.x;
+    AIinfo.marker = gameThemes[accenno.theme].x;
   }
   resetBoard();
   toggleCover("NR");
@@ -787,3 +806,35 @@ function pointTracking(num) {
 }
 
 //#endregion
+//#region settings
+$(function () {
+  $("#p2name").tooltip({
+    content: "Player 2 Name only applies in vs P2 games",
+  });
+});
+
+//#region
+//#region Themes
+
+function themes() {
+  let getTheme = $(this).data("theme");
+  accenno.theme = getTheme;
+
+  $("body").removeClass();
+  $("body").addClass(getTheme, 500, "swing");
+  $(".marker-buttons#o").html(gameThemes[`${getTheme}`].o);
+  $(".marker-buttons#x").html(gameThemes[`${getTheme}`].x);
+  circle.circleProgress({
+    fill: {
+      gradient: gameThemes[`${getTheme}`].circle,
+    },
+  });
+
+  if (accenno.theme === "catdog") {
+    titleAnim.show();
+    $("#catdog-animation").show();
+  } else {
+    $("#catdog-animation").hide();
+    titleAnim.hide();
+  }
+}
