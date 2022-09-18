@@ -14,7 +14,12 @@ font-family: 'ZCOOL QingKe HuangYou', cursive;
 html {
   background-color: #fdeedc;
   font-size: 1vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 section {
@@ -54,75 +59,43 @@ header {
   background-color: #e38b29;
   min-height: 10vh;
   height: 10vh;
-  padding: 1rem 2rem;
   display: flex;
   align-items: center;
 }
 
-#link-heading {
-  color: black;
-  text-decoration: none;
-}
-#link-logo {
-  display: inline-flex;
-}
 #heading {
   font-family: "ZCOOL QingKe HuangYou", cursive;
 }
 #logo-img {
-  height: 8rem;
+  height: 80%;
 }
 #blinking-header {
-  height: 8rem;
+  height: 80%;
   margin: 0 1rem;
 }
 
 /* #endregion */
 /* #region Main Menu */
-.landing-page {
-  height: 90vh;
-}
-
-.main-menu {
-  width: 50vw;
-  height: 63vh;
-  text-align: center;
-  border: 1px solid rgb(70, 70, 70);
-  border-radius: 3rem;
-  box-shadow: 5px 5px 5px 1px rgba(53, 53, 53, 0.644);
-  background-color: white;
-  align-self: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-  gap: 1em;
-}
-
-#titlecard {
-  height: 55%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  gap: 0;
+.brand-top {
+  width: 100%;
+  height: 10%;
 }
 
 #titlecard-logo {
-  align-self: center;
   height: 60%;
-  margin-bottom: 1.5em;
 }
 
-.mainmenu-buttons {
-  height: 25%;
+.mainmenu-btn {
+  height: 7rem;
+  width: 80%;
 }
-
 .mainmenu-buttons button {
   background-image: linear-gradient(#f1a661, #ffd8a9);
 }
 .mainmenu-buttons button:hover {
   background-image: linear-gradient(#fdeedc, #ffd8a9);
 }
+
 /* #endregion */
 /* #region How To Play Page */
 #instructions {
@@ -356,11 +329,67 @@ button#credits-btn:hover {
 .container.x-align {
   flex-direction: row;
 }
+/* #region flex gap */
+.gap-0 {
+  gap: 0;
+}
+.gap-1 {
+  gap: 1em;
+}
+.gap-2 {
+  gap: 2em;
+}
+.gap-3 {
+  gap: 3em;
+}
+.gap-4 {
+  gap: 4em;
+}
+.gap-5 {
+  gap: 5em;
+}
+/* #endregion */
 
 .full-page {
   height: 100vh;
-  width: 100%;
+  width: 100vw;
 }
+
+/* #region height & width */
+.h15 {
+  height: 15%;
+}
+
+.w40 {
+  width: 40%;
+}
+.h40 {
+  height: 40%;
+}
+.h45 {
+  height: 45%;
+}
+
+.w50 {
+  width: 50%;
+}
+.h50 {
+  height: 50%;
+}
+.w60 {
+  width: 60%;
+}
+.h60 {
+  height: 60%;
+}
+
+.w70 {
+  width: 70%;
+}
+.h70 {
+  height: 70%;
+}
+
 .w80 {
   width: 80%;
 }
@@ -370,9 +399,22 @@ button#credits-btn:hover {
 .w90 {
   width: 90%;
 }
+.h90 {
+  height: 90%;
+}
 .w100 {
   width: 100%;
 }
+.h100 {
+  height: 100%;
+}
+/* #endregion */
+
+/* #region Margin and Padding */
+.m
+
+
+/* #endregion */
 .card {
   border: 1px solid gray;
   border-radius: 2rem;
@@ -403,7 +445,6 @@ button {
   font-family: "ZCOOL QingKe HuangYou", cursive;
   font-size: 2.5rem;
   padding: 1rem 2rem;
-  margin: 1rem;
   border: 1px solid gray;
   border-radius: 1rem;
   background-color: white;

@@ -1,11 +1,34 @@
 //#region Global Variables
 const intervalID = { timer: 0, wait: 0, blink: 0, animHow: 0 };
 const timeoutID = { AI: 0, turnend: 0, animation: 0 };
-const playerInfo = { marker: "", turn: 0, wins: 0 };
-const AIinfo = { type: "AI", marker: "", turn: 0, wins: 0 };
-const markXO = {
-  o: '<img src="images/noughts.png" alt="O-mark" />',
-  x: '<img src="images/crosses.png" alt="X-mark" />',
+const playerInfo = { name: "", marker: "", turn: 0, wins: 0 };
+const AIinfo = { name: "", type: "AI", marker: "", turn: 0, wins: 0 };
+const gameThemes = {
+  classic: {
+    o: '<img src="images/themes/accenno-noughts.png" alt="O mark">',
+    x: '<img src="images/themes/accenno-crosses.png" alt="X mark">',
+    circle: ["#FF4A4A", "#FF9551"],
+  },
+  sunmoon: {
+    o: '<img src="images/themes/sunmoon-sun.png" alt="O Sun">',
+    x: '<img src="images/themes/sunmoon-moon.png" alt="X Moon">',
+    circle: ["#000000", "#001d9c"],
+  },
+  catdog: {
+    o: '<img src="images/themes/catdog-cat.png" alt="O Cat">',
+    x: '<img src="images/themes/catdog-dog.png" alt="X Dog">',
+    circle: ["#ffa600", "#ffd500"],
+  },
+  swordshield: {
+    o: '<img src="images/themes/swordshield-shield.png" alt="X Sheild">',
+    x: '<img src="images/themes/swordshield-sword.png" alt="O Sword">',
+    circle: ["#50796d", "#a7d6b6"],
+  },
+  karenkevin: {
+    o: '<img src="images/themes/karenkevin-karen.png" alt="O Karen">',
+    x: '<img src="images/themes/karenkevin-kevin.png" alt="X Kevin">',
+    circle: ["#0fa7ff", "#c7e7f5"],
+  },
 };
 const accenno = {
   board: {
@@ -15,6 +38,7 @@ const accenno = {
   },
   turnTracker: 1,
   roundTracker: 1,
+  theme: "classic",
 };
 
 //#endregion
@@ -29,8 +53,9 @@ const accenno = {
       } else {
         this.html(AIinfo.marker);
       }
+      return true;
     }
-    return this;
+    return false;
   };
   $.fn.animClick = function () {
     if (!this.attr("src")) {
@@ -53,39 +78,44 @@ const heading = $("#heading");
 const mainMenuBtn = $(".mainmenu-btn");
 const quitBtns = $(".quit-btn");
 const credits = $("#credits-btn");
+const playBtns = $("#play-btns");
+const gameMode = $("#game-mode");
+
+const themesBtn = $("#themes button");
+const titleAnim = $("#title-anim");
 
 const cursor = $("#anim-cursor");
-const animCell = $(".xo-cell-ex");
-const howCell = $(".instruction-text div");
-const animCover = $(".accenno-cover-ex");
+const animCell = $("#xo-board-ex td");
+const howCell = $("#instruction-text div");
+const animCover = $("#accenno-cover-ex");
 const animCross = $("#anim-cross");
 const animNought = $("#anim-nought");
 const playAnim = $("#play-anim");
 
 const gameBoard = $(".xo-board");
-const gameCell = $(".xo-cell");
+const gameCell = $(".xo-board td");
 const marker = $(".marker-buttons");
 
-const cover = $(".accenno-cover");
-const startMenu = $(".start-menu");
-const waiting = $(".waiting");
+const cover = $("#accenno-cover");
+const startMenu = $("#start-menu");
+const waiting = $("#waiting");
 const timeout = $("#timeout");
-const endingTurn = $(".ending-turn");
-const newRound = $(".new-round");
+const endingTurn = $("#ending-turn");
+const newRound = $("#new-round");
 const newRoundBtn = $("#new-round-btn");
 const nextRoundbtn = $("#next-round");
 
 const circle = $("#circle");
 const timerText = $("#timer-text");
-const popup = $(".popup");
+const popup = $("#popup");
 const turnText = $("#turn-text");
 const resText = $("#result-text");
 const resSubtext = $("#result-subtext");
 
 circle.circleProgress({
   value: 0,
-  size: $(".turn-status").height() * 0.9,
-  thickness: 20,
+  size: 150,
+  thickness: 15,
   fill: {
     gradient: ["#FF4A4A", "#FF9551"],
   },
@@ -100,6 +130,8 @@ function initialise() {
   animCover.hide();
   animCross.hide();
   animNought.hide();
+  playBtns.hide();
+  gameMode.removeClass("expand", 300, "swing");
 
   intervalID.blink = setInterval(function () {
     $("#blinking-header").toggle();
@@ -113,8 +145,10 @@ function initialise() {
 
 $(document).ready(function () {
   setTimeout(function () {
-    $(document).scrollTop(0);
+    $(document).scrollTop(0).scrollLeft(0);
   }, 100);
+  titleAnim.hide();
+  $(".banner").hide();
   initialise();
 });
 
@@ -126,21 +160,36 @@ marker.click(chooseMarker);
 gameCell.click(toggleSelected);
 gameCell.dblclick(confirmMark);
 playAnim.click(animateHow);
+themesBtn.click(themes);
+
 
 //#endregion
 
 //#region Navigation
 function gotoTarget() {
-  let playerType = $(this).data("target");
+  let target = $(this).data("target");
 
-  if (playerType == "how") {
+  if (target == "play") {
+    if (gameMode.hasClass("expand")) {
+      playBtns.toggle("slide", { direction: "up" }, 500, () => {
+        gameMode.toggleClass("expand", 300, "swing");
+      });
+    } else {
+      gameMode.toggleClass("expand", 300, "swing", () => {
+        playBtns.toggle("slide", { direction: "up" }, 500);
+      });
+    }
+    return;
+  } else if (target == "settings") {
+    $("html, body").animate({ scrollLeft: $("#settings").offset().left }, 800);
+  } else if (target == "how") {
     $("html, body").animate(
       { scrollTop: $("#instructions").offset().top },
       800
     );
-  } else if (playerType == "AI" || playerType == "2P") {
+  } else if (target == "AI" || target == "2P") {
     $("html, body").animate({ scrollTop: $("#gameboard").offset().top }, 800);
-    AIinfo.type = playerType;
+    AIinfo.type = target;
   }
   setTimeout(function () {
     clearInterval(intervalID.blink);
@@ -149,7 +198,7 @@ function gotoTarget() {
 }
 
 function returnToMenu() {
-  $("html, body").animate({ scrollTop: 0 }, 800);
+  $("html, body").animate({ scrollTop: 0, scrollLeft: 0 }, 800);
   setTimeout(function () {
     initialise();
   }, 800);
@@ -185,7 +234,7 @@ function animateHow() {
   };
   const firstAnim = () => {
     howCell.removeClass("active", 500, "swing");
-    $(".one").addClass("active", 500, "swing");
+    $("#one").addClass("active", 500, "swing");
 
     cursor.animate({ left: "+=100%", top: "-=100%" }, 1500);
     setTimeout(function () {
@@ -362,13 +411,13 @@ function toggleHoverClick(id) {
 //#endregion
 //#region Game Algorithm
 function chooseMarker() {
-  playerInfo.marker = markXO[$(this).data("marker")];
-  if (playerInfo.marker === markXO.o) {
-    AIinfo.marker = markXO.x;
+  playerInfo.marker = gameThemes[accenno.theme][$(this).data("marker")];
+  if (playerInfo.marker === gameThemes[accenno.theme].o) {
+    AIinfo.marker = gameThemes[accenno.theme].x;
     playerInfo.turn = 1;
     AIinfo.turn = 2;
   } else {
-    AIinfo.marker = markXO.o;
+    AIinfo.marker = gameThemes[accenno.theme].o;
     playerInfo.turn = 2;
     AIinfo.turn = 1;
   }
@@ -399,9 +448,11 @@ function toggleSelected() {
 }
 
 function confirmMark() {
-  $(this).placeMarker();
-  markBoard($(this).data("pos"));
-  endTurn();
+  if ($(this).placeMarker()) {
+    $(this).placeMarker();
+    markBoard($(this).data("pos"));
+    endTurn();
+  }
 }
 
 function endTurn() {
@@ -418,7 +469,7 @@ function endTurn() {
     } else {
       turns();
     }
-  }, 1250);
+  }, 450);
 }
 
 function turnAI() {
@@ -426,15 +477,15 @@ function turnAI() {
 
   if (AIinfo.type === "AI") {
     turnText.text("AI Turn");
-    toggleCover("AI");
+    setTimeout(() => {
+      toggleCover("AI");
+    }, 500);
 
     const chooseAI = () => {
       let rowAI = "r" + Math.ceil(Math.random() * 3);
       let colAI = "c" + Math.ceil(Math.random() * 3);
       return [rowAI, colAI];
     };
-
-    let randomTime = 1000 + Math.ceil(Math.random() * 9) * 1000;
 
     let occupied = true;
     let selectionAI = chooseAI();
@@ -453,8 +504,9 @@ function turnAI() {
       );
       markBoard(selectionAI);
       placeAI.html(AIinfo.marker);
+      placeAI.removeClass("empty");
       endTurn();
-    }, randomTime);
+    }, 3000);
   } else {
     turnText.text("P2 Turn");
     toggleCover();
@@ -733,14 +785,14 @@ function nextRound() {
   $("#round-num").text(accenno.roundTracker);
   if (playerInfo.turn === 1) {
     playerInfo.turn = 2;
-    playerInfo.marker = markXO.x;
+    playerInfo.marker = gameThemes[accenno.theme].x;
     AIinfo.turn = 1;
-    AIinfo.marker = markXO.o;
+    AIinfo.marker = gameThemes[accenno.theme].o;
   } else {
     playerInfo.turn = 1;
-    playerInfo.marker = markXO.o;
+    playerInfo.marker = gameThemes[accenno.theme].o;
     AIinfo.turn = 2;
-    AIinfo.marker = markXO.x;
+    AIinfo.marker = gameThemes[accenno.theme].x;
   }
   resetBoard();
   toggleCover("NR");
@@ -765,3 +817,39 @@ function pointTracking(num) {
 }
 
 //#endregion
+
+//#region Themes
+
+function themes() {
+  let getTheme = $(this).data("theme");
+  accenno.theme = getTheme;
+
+  $("body").removeClass();
+  $("body").addClass(getTheme, 500, "swing");
+  $(".marker-buttons#o").html(gameThemes[`${getTheme}`].o);
+  $(".marker-buttons#x").html(gameThemes[`${getTheme}`].x);
+  circle.circleProgress({
+    fill: {
+      gradient: gameThemes[`${getTheme}`].circle,
+    },
+  });
+
+  if (accenno.theme === "catdog") {
+    titleAnim.show();
+    $("#catdog-animation").show();
+  } else if (accenno.theme === "swordshield") {
+    $(".banner").show();
+    $("#catdog-animation").hide();
+  } else {
+    $("#catdog-animation").hide();
+    $(".banner").hide();
+    titleAnim.hide();
+  }
+
+  setTimeout(() => {
+    $("html, body").animate({ scrollTop: 0, scrollLeft: 0 }, 800);
+  }, 500);
+}
+
+//#endregion
+//#region Personalisation
