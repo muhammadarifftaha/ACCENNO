@@ -30,7 +30,7 @@
     <script src="assets/jquery-ui.js"></script>
     <script src="assets/app.js" defer></script>
   </head>
-  <body>
+  <body class="">
     <div class="two-page-level">
       <section class="full-page-section" id="landing-section">
         <header id="brand-top">
@@ -38,50 +38,87 @@
           <h1 id="heading">ACCENNO</h1>
           <img id="blinking-header" src="images/line.png" alt="" />
         </header>
-        <div id="landing-page">
-          <div class="card" id="main-menu">
+        <div id="landing-page" class=>
+        <div class="card" id="main-menu">
+          <div id="title-box">
             <div id="titlecard">
               <img src="images/full-logo-trimmed.png" alt="ACCENNO Logo" />
               <h3>A Tic-Tac-Toe Game</h3>
               <h6>by <a id="credits-btn">TAHA &copy;</a></h6>
             </div>
-            <div id="mainmenu-buttons">
-              <div id="game-mode">
-                <button type="button" class="mainmenu-btn" data-target="play">
-                  PLAY
-                </button>
-                <div id="play-btns">
-                  <button type="button" class="mainmenu-btn" data-target="AI">
-                    P1 VS AI
-                  </button>
-                  <button type="button" class="mainmenu-btn" data-target="2P">
-                    P1 VS 2P
-                  </button>
-                </div>
+            <div id="title-anim">
+              <div id="catdog-animation">
+                <img src="images/gifs/dog.gif" id="dog" alt="Dog chasing" />
+                <img src="images/gifs/cat.gif" id="cat" alt="Cat Running" />
               </div>
-              <button type="button" class="mainmenu-btn" data-target="how">
-                HOW TO PLAY
-              </button>
-              <button type="button" class="mainmenu-btn" data-target="settings">
-                SETTINGS
-              </button>
             </div>
+          </div>
+          <div id="mainmenu-buttons">
+            <div id="game-mode">
+              <button type="button" class="mainmenu-btn" data-target="play">
+                PLAY
+              </button>
+              <div id="play-btns">
+                <button type="button" class="mainmenu-btn" data-target="AI">
+                  P1 VS AI
+                </button>
+                <button type="button" class="mainmenu-btn" data-target="2P">
+                  P1 VS 2P
+                </button>
+              </div>
+            </div>
+            <button type="button" class="mainmenu-btn" data-target="how">
+              HOW TO PLAY
+            </button>
+            <button type="button" class="mainmenu-btn" data-target="settings">
+              SETTINGS
+            </button>
           </div>
         </div>
       </section>
       <section class="full-page-section" id="settings">
         <div class="card">
-          <div id="themes">
-            <button>ACCENNO Classic</button>
-            <button>Cat vs Dog</button>
-            <button>Sword vs Shield</button>
-            <button>iOS vs Andriod</button>
-            <button>Fire vs Water</button>
-          </div>
+          <div id="settings-box">
+            <div id="themes">
+              <h4>Themes</h4>
+              <button data-theme="classic">ACCENNO Classic</button>
+              <button data-theme="catdog">Cat vs Dog</button>
+              <button data-theme="swordshield">Sword vs Shield</button>
+              <button data-theme="sunmoon">Sun vs Moon</button>
+              <button data-theme="firewater">Fire vs Water</button>
+            </div>
 
-          <button type="button" class="quit-btn">
-            <img src="images/quit.png" alt="Quit Game" />
-          </button>
+            <form id="other-settings">
+              <h4 style="align-self: start">Personalisation Settings</h4>
+              <div class="input-group">
+                <label for="p1-name">Player 1 Name</label>
+                <input type="text" name="p1-name" />
+              </div>
+              <div class="input-group">
+                <label for="p2-name">Player 2 Name</label>
+                <input type="text" name="p2-name" id="p2name" />
+              </div>
+              <div class="input-group">
+                <label for="rounds" id="rounds-label"
+                  >Max number of rounds</label
+                >
+                <select name="rounds" id="no-of-rounds">
+                  <option value="3">3</option>
+                  <option value="5">5</option>
+                  <option value="7">7</option>
+                  <option value="0">Endless</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="name">Player 1 Name</label>
+                <input type="text" />
+              </div>
+            </form>
+
+            <button type="button" class="quit-btn">
+              <img src="images/quit.png" alt="Quit Game" />
+            </button>
+          </div>
         </div>
       </section>
     </div>
@@ -100,7 +137,11 @@
                 <td id="r2c1"></td>
                 <td class="anim-start anim-hover" id="r2c2">
                   <img id="anim-cursor" src="images/cursor.png" alt="" />
-                  <img id="anim-cross" src="images/crosses.png" alt="O-mark" />
+                  <img
+                    id="anim-cross"
+                    src="images/themes/accenno-crosses.png"
+                    alt="X-mark"
+                  />
                 </td>
                 <td id="r2c3"></td>
               </tr>
@@ -108,7 +149,11 @@
                 <td id="r3c1"></td>
                 <td id="r3c2"></td>
                 <td id="r3c3">
-                  <img id="anim-nought" src="images/noughts.png" alt="O-mark" />
+                  <img
+                    id="anim-nought"
+                    src="images/themes/accenno-noughts.png"
+                    alt="O-mark"
+                  />
                 </td>
               </tr>
             </table>
@@ -153,6 +198,7 @@
                 again.
               </p>
             </div>
+            <img src="" alt="" />
           </div>
         </div>
         <div class="container x-align">
@@ -239,11 +285,12 @@
                     type="button"
                     title="crosses"
                     class="marker-buttons"
+                    id="x"
                     data-marker="x"
                   >
                     <img
                       class="marker-choice"
-                      src="images/crosses.png"
+                      src="images/themes/accenno-crosses.png"
                       alt="Crosses/X"
                     />
                   </button>
@@ -251,11 +298,12 @@
                     type="button"
                     title="noughts"
                     class="marker-buttons"
+                    id="o"
                     data-marker="o"
                   >
                     <img
                       class="marker-choice"
-                      src="images/noughts.png"
+                      src="images/themes/accenno-noughts.png"
                       alt="Noughts/O"
                     />
                   </button>
