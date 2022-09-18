@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Acceno is a game of noughts and crosses, or tic-tac-toe as some regoins would call it. Accenno is designed to be intuitive and user friendly with a great UI and UX. The rules of the game are as the usual noughts and crosses.
+Accenno is a game of noughts and crosses, or tic-tac-toe as some regoins would call it. Accenno is designed to be intuitive and user friendly with a great UI and UX. The rules of the game are as the usual noughts and crosses.
 
 ## Installation
 
@@ -27,9 +27,12 @@ Copy this link and paste in in your browser
 
 ## Development, APIs, etc.
 
-A majority of the development was done with basic HTML, CSS and JavaScript.
+A majority of the development was done with basic HTML and JavaScript.
+
 The APIs used in this project:
 
+- Sass
+  - All styling was done using sass or scss and was later converted to css for implementation using [Scout-App](https://scout-app.io/)
 - jQuery
   - All the DOM manipulation, event handling and animations involved was written with jQuery
 - jQuery UI
@@ -39,7 +42,7 @@ The APIs used in this project:
 
 ## Approach
 
-[ACCENO](https://pages.git.generalassemb.ly/muhammadarifftaha/accenno/) was decidely made to reduce the time users may take to figure out what to do. Hopefully, the design choices works well to direct users to where they want to be. (i.e. Playing the Game)
+[ACCENNO](https://pages.git.generalassemb.ly/muhammadarifftaha/accenno/) was decidely made to reduce the time users may take to figure out what to do. Hopefully, the design choices works well to direct users to where they want to be. (i.e. Playing the Game)
 
 The "How To Play" was by far the most difficult part. The animations were made to help users visualise what they needed to do and it involves mutiple nested `setTimeout`.
 
@@ -47,11 +50,13 @@ The game board is fairly simple using a `<table>` with borders. Each cell is equ
 
 ### Link to Resources
 
-- jQuery - [https://api.jquery.com/](https://api.jquery.com/)
+- jQuery - https://api.jquery.com/
 
-- jQuery UI - [https://api.jqueryui.com/](https://api.jqueryui.com/)
+- jQuery UI -https://api.jqueryui.com/
 
-- [kottenator](https://github.com/kottenator "kottenator's GitHub Page")'s Radial Progress Bars - [https://github.com/kottenator/jquery-circle-progress](https://github.com/kottenator/jquery-circle-progress)
+- Sass - https://sass-lang.com/
+
+- [kottenator](https://github.com/kottenator "kottenator's GitHub Page")'s Radial Progress Bars - https://github.com/kottenator/jquery-circle-progress
 
 - Flaticon - [https://www.flaticon.com/](https://www.flaticon.com)
 
@@ -67,6 +72,18 @@ The game board is fairly simple using a `<table>` with borders. Each cell is equ
 
   - Close icons created by ariefstudio - [Link](https://www.flaticon.com/free-icons/close)
 
-- Canva - [https://www.canva.com/](https://www.canva.com/)
+  - Sun icons created by Freepik - [Link](https://www.flaticon.com/free-icons/sun)
+
+  - Moon icons created by Freepik - [Link](https://www.flaticon.com/free-icons/moon)
+
+  - Sword icons created by Freepik - [Link](https://www.flaticon.com/free-icons/sword)
+
+  - Shield icons created by Freepik - [Link](https://www.flaticon.com/free-icons/shield)
+
+  - Angry icons created by Freepik - [Link](https://www.flaticon.com/free-icons/angry)
+
+  - Cat icons created by Freepik - [Link](https://www.flaticon.com/free-icons/cat)
+
+  - Dog icons created by AomAm - [Link](https://www.flaticon.com/free-icons/dog)
 
 <!-- the approach taken, installation instructions, unsolved problems, etc. -->
