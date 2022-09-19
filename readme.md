@@ -20,10 +20,19 @@ Copy this link and paste in in your browser
 
      https://pages.git.generalassemb.ly/muhammadarifftaha/accenno/
 
-## Game Algorithm Flowchart
+## Pre-Development
+
+### Algorithm Flowchart
 
 ![Flowchart](/docs/accenno_flowchart_in-depth.png)
 [Full Image](/docs/accenno_flowchart_in-depth.png)
+
+### Prototype Screen Capture
+
+<img src="docs/Prototype/landing-page.png" alt="Landing Page" width="40%">
+<img src="docs/Prototype/tutorial.png" alt="Tutorial Page" width="40%">
+<img src="docs/Prototype/gameboard.png" alt="Gameboard Page" width="40%">
+<img src="docs/Prototype/settings.png" alt="Settings Page" width="40%">
 
 ## Development, APIs, etc.
 
