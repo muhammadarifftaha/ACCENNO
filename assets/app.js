@@ -162,7 +162,6 @@ gameCell.dblclick(confirmMark);
 playAnim.click(animateHow);
 themesBtn.click(themes);
 
-
 //#endregion
 
 //#region Navigation
@@ -410,6 +409,8 @@ function toggleHoverClick(id) {
 
 //#endregion
 //#region Game Algorithm
+
+// allows the plyer to choose their marker
 function chooseMarker() {
   playerInfo.marker = gameThemes[accenno.theme][$(this).data("marker")];
   if (playerInfo.marker === gameThemes[accenno.theme].o) {
@@ -424,6 +425,7 @@ function chooseMarker() {
   turns();
 }
 
+// decides who's turn based on the turn marker
 function turns() {
   if (playerInfo.turn === accenno.turnTracker) {
     turnPlayer();
@@ -432,6 +434,7 @@ function turns() {
   }
 }
 
+// players turn starts timer and unlocks the board
 function turnPlayer() {
   turnText.text("P1 Turn");
   turnTimer();
@@ -455,6 +458,7 @@ function confirmMark() {
   }
 }
 
+// end turn after either player
 function endTurn() {
   turnTimeout();
   toggleCover("ET");
@@ -472,6 +476,12 @@ function endTurn() {
   }, 450);
 }
 
+// AI turn
+// if AI is actually human player 2
+// then the turn functions like another player turn
+// AI generates 2 random numbers for row and column
+// and checks if occupied, is true then it generates another number
+// if unnocupied it will take 3 seconds to place a marker on the board
 function turnAI() {
   turnTimer();
 
